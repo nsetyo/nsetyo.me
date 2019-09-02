@@ -1,0 +1,3 @@
+[submodule "themes/esteye-hugo-theme"]
+	path = themes/esteye-hugo-theme
+	url = git@gitlab.com:nsetyo/esteye-hugo-theme.git
