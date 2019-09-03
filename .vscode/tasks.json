@@ -15,9 +15,11 @@
             "problemMatcher": [
                 {
                     "owner": "go",
-                    "fileLocation": ["absolute"],
+                    "fileLocation": [
+                        "absolute"
+                    ],
                     "pattern": {
-                        "regexp": "^(ERROR) ([0-9 \/:]*) ([^:]*: [^:]*): \"(.*):(.*):(.*)\": (.*)",
+                        "regexp": "^(ERROR) ([0-9 /:]*) ([^:]*: [^:]*): \"(.*):(.*):(.*)\": (.*)",
                         "file": 4,
                         "line": 5,
                         "column": 6,
