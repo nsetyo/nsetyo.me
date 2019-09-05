@@ -33,6 +33,17 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "npm",
+            "script": "build",
+            "path": "themes/esteye-hugo-theme/",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "revealProblems": "onProblem"
+            },
         }
     ]
 }
