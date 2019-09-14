@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "command": "hugo server",
+            "command": "hugo server --config config.yaml --disableFastRender",
             "isBackground": true,
             "label": "Serve",
             "type": "shell",
