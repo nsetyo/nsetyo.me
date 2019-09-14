@@ -1,4 +1,38 @@
-baseURL: //nsetyo.id
-languageCode: id-ID
-title: nsetyo.id
-theme: esteye-hugo-theme
+baseURL     : //nsetyo.id
+title       : nsetyo.
+theme       : esteye-hugo-theme
+languageCode: id
+languageName: Indonesian
+
+canonifyURLs: false
+disableHugoGeneratorInject: true
+enableRobotsTXT: true
+footnoteReturnLinkContents: ↩
+MetaDataFormat: yaml
+paginate: 5
+
+pygmentsCodeFences: true
+pygmentsUseClasses: true
+pygmentsCodefencesGuessSyntax: true
+
+blackfriday:
+    hrefTargetBlank: true # Open link in new tab
+
+params:
+  canonicalUrl: https://nsetyo.id
+  description : Catatan nsetyo! Sebuah catatan pribadi, tidak kurang, apalagi lebih.
+
+menu:
+  navigation:
+    - name  : Articles
+      url   : /posts/
+      weight: 1
+    - name  : By Categories
+      url   : /categories/
+      weight: 2
+    - name  : Projects
+      url   : /projects/
+      weight: 3
+    - name  : Contact
+      url   : /contact/
+      weight: 100
