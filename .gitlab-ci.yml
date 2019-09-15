@@ -10,7 +10,7 @@ before_script:
   - echo "$HUGO_VERSION"
   - wget https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION\_Linux-64bit.tar.gz -O hugo.tar.gz
   - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
-  - tar xzvf hugo.tar.gz && cp ./hugo/hugo /usr/bin/hugo
+  - tar xzvf hugo.tar.gz && cp ./hugo /usr/bin/hugo
   - hugo version
   - npm install -g postcss-cli autoprefixer postcss-import
 pages:
