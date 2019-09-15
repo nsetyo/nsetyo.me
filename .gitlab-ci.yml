@@ -4,13 +4,13 @@ variables:
   HUGO_VERSION : "0.58.2"
   HUGO_CHECKSUM: "7ac65f7ee6dd30f6c3667e0c2fa22a0034c0945e0614447c6b2b4d7795d192d2"
 before_script:
-  - apt update && apt install curl
+  - apt update && apt install --no-install-recommends -y curl
   - curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION\_Linux-64bit.tar.gz
   - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
   - tar xzvf hugo.tar.gz && cp ./hugo /usr/bin/hugo
   - hugo version
   - curl -sL https://deb.nodesource.com/setup_12.x | bash -
-  - apt update && apt install openssl nodejs git
+  - apt update && apt install --no-install-recommends -y openssl nodejs git
   - git submodule sync --recursive
   - git submodule update --init --recursive
   - npm install -g postcss-cli autoprefixer postcss-import
