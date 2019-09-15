@@ -1,16 +1,20 @@
 image: alpine:latest
 
+variables:
+  HUGO_VERSION : "0.58.2"
+  HUGO_CHECKSUM: "7ac65f7ee6dd30f6c3667e0c2fa22a0034c0945e0614447c6b2b4d7795d192d2"
 before_script:
   - apk add --update openssl nodejs git
   - git submodule sync --recursive
   - git submodule update --init --recursive
-  - wget https://github.com/gohugoio/hugo/releases/download/v0.58.2/hugo_extended_0.58.2_Linux-64bit.tar.gz -o hugo.tar.gz
-  - echo "7ac65f7ee6dd30f6c3667e0c2fa22a0034c0945e0614447c6b2b4d7795d192d2  hugo.tar.gz" | sha256sum -c
+  - wget https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION_Linux-64bit.tar.gz -o hugo.tar.gz
+  - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
   - tar xzvf hugo.tar.gz && cp ./hugo/hugo /usr/bin/hugo
   - hugo version
+  - npm install -g postcss-cli autoprefixer postcss-import
 pages:
   script:
-  - hugo
+  - hugo --minify
   artifacts:
     paths:
     - public
