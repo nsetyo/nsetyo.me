@@ -7,7 +7,7 @@ before_script:
   - apk add --update openssl nodejs git
   - git submodule sync --recursive
   - git submodule update --init --recursive
-  - wget https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION_Linux-64bit.tar.gz -O hugo.tar.gz
+  - wget https://github.com/gohugoio/hugo/releases/download/v{$HUGO_VERSION}/hugo_extended_{$HUGO_VERSION}_Linux-64bit.tar.gz -O hugo.tar.gz
   - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
   - tar xzvf hugo.tar.gz && cp ./hugo/hugo /usr/bin/hugo
   - hugo version
