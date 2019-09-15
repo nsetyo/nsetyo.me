@@ -17,7 +17,7 @@ before_script:
   - cd themes/esteye-hugo-theme && npm install
 pages:
   script:
-  - hugo --minify
+  - hugo --minify -d public
   artifacts:
     paths:
     - public
