@@ -35,10 +35,14 @@ deploy:
     - master
   dependencies:
     - build
+
 pages:
   stage : deploy
   script: /bin/true
   only:
     - master
+  artifacts:
+    paths:
+      - public
   dependencies:
     - build
