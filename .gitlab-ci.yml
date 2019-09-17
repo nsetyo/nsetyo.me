@@ -3,10 +3,16 @@ image: debian:latest
 variables:
   HUGO_VERSION : "0.58.2"
   HUGO_CHECKSUM: "7ac65f7ee6dd30f6c3667e0c2fa22a0034c0945e0614447c6b2b4d7795d192d2"
+  THEME_NAME   : "esteye-hugo-theme"
 
 stages:
   - build
   - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - themes/${THEME_NAME}/node_modules/
 
 before_script:
   - apt update && apt install --no-install-recommends -y curl ca-certificates
@@ -24,20 +30,21 @@ before_script:
 build:
   stage : build
   script: hugo --minify -d public
+  artifacts:
+    paths:
+      - public
 
 deploy:
   stage : deploy
   script: netlify deploy --prod -s $NETLIFY_SITE_ID -a $NETLIFY_ACCESS_TOKEN -d public
-  artifacts:
-    paths:
-      - public
   only:
     - master
+  dependencies:
+    - build
 pages:
   stage : deploy
   script: /bin/true
-  artifacts:
-    paths:
-      - public
   only:
     - master
+  dependencies:
+    - build
