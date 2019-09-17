@@ -31,6 +31,8 @@ deploy:
   only:
     - master
 pages:
+  stage : deploy
+  script: /bin/true
   artifacts:
     paths:
       - public
