@@ -28,6 +28,9 @@ build:
 deploy:
   stage : deploy
   script: netlify deploy --prod -s $NETLIFY_SITE_ID -a $NETLIFY_ACCESS_TOKEN -d public
+  artifacts:
+    paths:
+      - public
   only:
     - master
 pages:
