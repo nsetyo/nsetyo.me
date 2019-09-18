@@ -18,13 +18,13 @@ layar. Widget merupakan komponen antarmuka seperti textbox dan tombol.
 
 <!--more-->
 
-Persiapan:
+### 1. Persiapan:
 
 1. Buat [project baru][1].
 2. Buka berkas `app > res > layout > activity_main.xml` yang ada pada
    project.
 3. Klik tab design pada bagian bawah window.
-4. Aktifkan blueprint (1).
+4. Aktifkan Blueprint (1).
 5. Aktifkan Show Constraint (2).
 6. Matikan Autoconnect (3).
 7. Ubah default margin menjadi 16.
@@ -35,9 +35,9 @@ Persiapan:
     title="Gambar 1. Interface Android Studio"
 >}}
 
-### 1. Menambahkan Textbox
+### 2. Menambahkan Textbox
 
-#### 1.1 Menggunakan Design Editor
+#### 2.1 Menggunakan Design Editor
 
 1. Dari jendela palette di bagian kiri, pilih panel __Text__, lalu klik
    dan tarik __Plain Text__ ke design editor. __Plain Text__ ini
@@ -65,7 +65,7 @@ Persiapan:
        title="Gambar 3. Constraint anchor ke bagian atas dan kiri layout"
    >}}
 
-#### 1.2 Menggunakan XML Editor
+#### 2.2 Menggunakan XML Editor
 
 Tambahkan syntax berikut pada `app > res > layout > activity_main.xml`
 
@@ -111,9 +111,9 @@ Sehingga `activity_main.xml` menjadi
 </android.support.constraint.ConstraintLayout>
 ```
 
-### 2. Menambahkan Tombol
+### 3. Menambahkan Tombol
 
-#### 2.1 Menggunakan Design Editor
+#### 3.1 Menggunakan Design Editor
 
 1. Dari jendela palette di bagian kiri, pilih panel __Widgets__, lalu
    klik dan tarik __Button__ ke design editor.
@@ -128,7 +128,7 @@ Sehingga `activity_main.xml` menjadi
     title="Gambar 4. Constraint Pada Tombol"
 >}}
 
-#### Menggunakan XML Editor
+#### 3.2 Menggunakan XML Editor
 
 Tambahkan syntax berikut pada `app > res > layout > activity_main.xml`
 
@@ -179,7 +179,7 @@ Sehingga `activity_main.xml` menjadi:
 
 ```
 
-### Membuat Textbox fleksibel
+### 4. Membuat Textbox fleksibel
 
 Saat ini lebar dari textbox hanya 10ems, sehingga terdapat ruang kosong
 pada bagian kanan layar, sebelah kanan tombol, seperti terlihat pada
