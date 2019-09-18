@@ -3,6 +3,7 @@ image: debian:latest
 variables:
   HUGO_VERSION : "0.58.2"
   HUGO_CHECKSUM: "7ac65f7ee6dd30f6c3667e0c2fa22a0034c0945e0614447c6b2b4d7795d192d2"
+  HUGO_ENV     : "production"
 
 stages:
   - build
