@@ -4,12 +4,16 @@
 /css/*
   cache-control: public
   cache-control: max-age=31536000
+  cache-control: s-maxage=31536000
 /fonts/*
   cache-control: public
   cache-control: max-age=31536000
+  cache-control: s-maxage=31536000
 /images/*
   cache-control: public
   cache-control: max-age=31536000
+  cache-control: s-maxage=31536000
 /js/*
   cache-control: public
   cache-control: max-age=31536000
+  cache-control: s-maxage=31536000
