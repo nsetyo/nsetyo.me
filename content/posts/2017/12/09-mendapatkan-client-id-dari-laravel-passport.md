@@ -1,5 +1,5 @@
 ---
-title: Mendapatkan CLient ID Dari User Laravel Passport
+title: Mendapatkan Client ID Dari User Laravel Passport
 categories:
   - Development
 tags:
