@@ -16,28 +16,31 @@ stages:
 
 before_script:
   - export APT_CACHE_DIR=`pwd`/apt-cache && mkdir -pv $APT_CACHE_DIR
+  - ls -la $APT_CACHE_DIR
   - apt update && apt -o dir::cache::archives="$APT_CACHE_DIR" install --no-install-recommends  -yqq curl ca-certificates
-  - curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION\_Linux-64bit.tar.gz
-  - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
-  - tar xzvf hugo.tar.gz && cp ./hugo /usr/bin/hugo
-  - hugo version
   - curl -sL https://deb.nodesource.com/setup_12.x | bash -
-  - apt update && apt install --no-install-recommends -yqq openssl nodejs git
-  - npm install -g postcss-cli autoprefixer postcss-import netlify-cli
+  - apt update && apt -o dir::cache::archives="$APT_CACHE_DIR" install --no-install-recommends -yqq openssl nodejs git
   - git submodule sync --recursive
   - git submodule update --init --recursive
-  - cd themes/esteye-hugo-theme && npm install && cd ../..
 
 build:
   stage : build
-  script: hugo --minify -d public
+  script:
+    - npm install -g postcss-cli autoprefixer postcss-import
+    - cd themes/esteye-hugo-theme && npm install && cd ../..
+    - curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION\_Linux-64bit.tar.gz
+    - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
+    - tar xzvf hugo.tar.gz && cp ./hugo /usr/bin/hugo
+    - hugo --minify -d public
   artifacts:
     paths:
       - public
 
 deploy:
   stage : deploy
-  script: netlify deploy --prod -s $NETLIFY_SITE_ID -a $NETLIFY_ACCESS_TOKEN -d public
+  script:
+    - npm install -g netlify-cli
+    - netlify deploy --prod -s $NETLIFY_SITE_ID -a $NETLIFY_ACCESS_TOKEN -d public
   only:
     - master
   dependencies:
