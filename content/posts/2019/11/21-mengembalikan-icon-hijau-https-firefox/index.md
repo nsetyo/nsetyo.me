@@ -15,6 +15,8 @@ laman https alih-alih gembok hijau[^1].
 
 {{< figure src="images/identity_icons.png" link="images/identity_icons.png" >}}
 
+<!--more-->
+
 Saya pribadi lebih menyukai https digambarkan
 dengan icon gembok berwarna hijau, jadi untuk mengembalikannya saya mengubah
 konfigurasi `about:config` pada key `security.secure_connection_icon_color_gray.`

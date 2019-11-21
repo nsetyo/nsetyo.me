@@ -17,6 +17,8 @@ pada versi 68[^1].
   link="images/Treatment_of_HTTP_Pages1x.max-1000x1000.png" 
 >}}
 
+<!--more-->
+
 Untuk menerapkan _service workers_ pada aplikasi berbasis web, w3c juga 
 mewakibkan aplikasi berada pada secure context[^2][^3]
 
