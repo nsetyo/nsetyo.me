@@ -7,6 +7,8 @@ tags :
  - jQuery
 date  : 2016-05-15
 disqus_identifier: /pemrograman/jvectormap-peta-indonesia
+alias: 
+ - /post/peta-indonesia-untuk-jvectormap/
 ---
 
 [Jvectormap][07] merupakan perangkat lunak berguna untuk membuat peta vector
