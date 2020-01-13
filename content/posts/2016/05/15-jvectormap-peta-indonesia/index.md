@@ -7,7 +7,7 @@ tags :
  - jQuery
 date  : 2016-05-15
 disqus_identifier: /pemrograman/jvectormap-peta-indonesia
-alias: 
+aliases: 
  - /post/peta-indonesia-untuk-jvectormap/
 ---
 
