@@ -240,13 +240,13 @@ module.exports = {
         require('tailwindcss')(__dirname + '/tailwind.config.js'),
         require('autoprefixer'),
 
-        ...process.env.HUGO_ENV === 'production' ? [purgecss] : []
+        ...process.env.HUGO_ENVIRONMENT === 'production' ? [purgecss] : []
   ]
 }
 ```
 
-Contoh di atas memastikan bahwa PurgeCss hanya berjalan apabila _environment_
-`HUGO_ENV` adalah `production`. PurgeCss menggunakan `extractors` untuk dapat
+Contoh di atas memastikan bahwa PurgeCss hanya berjalan apabila `HUGO_ENVIRONMENT'`
+`===` `production`. PurgeCss menggunakan `extractors` untuk dapat
 menemukan teks di template yang merupakan `class` css. Contoh di atas menggunakan
 custom extractors untuk menemukan semua class yang di-_generate_ tailwindcss[^5].
 
