@@ -1,6 +1,6 @@
 ---
 title: Menggunakan TailwindCss di Hugo-Pipes
-categories: 
+categories:
   - Development
 tags:
   - PostCss
@@ -10,25 +10,26 @@ tags:
 date: 2019-09-17
 ---
 
-Hugo Pipes merupakan fitur dari hugo _static site generator_ yang berfungsi 
-untuk memroses aset seperti css dan javascript[^1]. Hugo Pipes mendukung 
-penggunaan postcss _out of the box_[^2]. Karena tailwindcss sebenarnya merupakan 
-plugin dari postcss, untuk menggunakan tailwindcss di Hugo Pipes kita dapat 
-menggunakan postcss. Untuk dapat menggunakan postcss di Hugo Pipe, Hugo 
+Hugo Pipes merupakan fitur dari hugo _static site generator_ yang berfungsi
+untuk memroses aset seperti css dan javascript[^1]. Hugo Pipes mendukung
+penggunaan postcss _out of the box_[^2]. Karena tailwindcss sebenarnya merupakan
+plugin dari postcss, untuk menggunakan tailwindcss di Hugo Pipes kita dapat
+menggunakan postcss. Untuk dapat menggunakan postcss di Hugo Pipe, Hugo
 mengharuskan `postcss-cli` untuk terlebih dahulu terinstall di sistem.
 
 ### Install PostCss CLI
 
-```
+```shell
 npm install -g postcss-cli
 ```
 
 <!--more-->
 
 ### Install TailwindCss dan Autoprefixer
-Install `tailwindcss` dan `autoprefixer` di root project folder atau di theme 
+Install `tailwindcss` dan `autoprefixer` di root project folder atau di theme
 folder. Install dengan perintah
-```
+
+```shell
 npm install --save-dev tailwindcss autoprefixer
 ```
 
@@ -48,7 +49,7 @@ module.exports = {
 ```
 
 ### Penggunaan di Hugo-Pipes
-```html
+```go-html-template
 {{ $css := resources.Get "css/style.css" | resources.PostCSS }}
 
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
@@ -57,7 +58,7 @@ module.exports = {
 Apabila kita menggunakan nama lain untuk `postcss-config.js`, atau config berada
 di tempat khusus di luar root project atau root theme, bisa gunakan:
 
-```html
+```go-html-template
 {{ $css := resources.Get "css/style.css" | resources.PostCSS (dict "config" "customPostCSS.js") }}
 
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
@@ -79,8 +80,8 @@ di <https://tailwindcss.com/docs>
 
 
 ### Custom Tailwind Config
-Hal yang membuat tailwindcss menarik adalah karena tailwind sangat mudah 
-dikustomisasi. Kustomisasi tailwind dapat dilakukan dengan menggunakan berkas 
+Hal yang membuat tailwindcss menarik adalah karena tailwind sangat mudah
+dikustomisasi. Kustomisasi tailwind dapat dilakukan dengan menggunakan berkas
 config `tailwind.config.js`. Buat berkas `tailwind.config.js` dengan isi:
 
 ```js
@@ -95,7 +96,7 @@ module.exports = {
 
 Atau dengan mengetik perintah berikut untuk membuat berkas config otomatis.
 
-```
+```shell
 npx tailwind init
 ```
 
@@ -114,7 +115,7 @@ module.exports = {
 ```
 
 ### Mengurangi Ukuran CSS
-Salah satu kekurangan dari tailwind adalah ukuran berkasnya yang cukup besar 
+Salah satu kekurangan dari tailwind adalah ukuran berkasnya yang cukup besar
 dibanding framework lain. Berikut merupakan tabel perbandingan ukuran css framework:
 
 | Framework   | Original Size | Minified |
@@ -136,8 +137,8 @@ Default theme pada tailwindcss terdiri dari 93 warna untuk _backgroud_, teks,
 dan _border_, yang masing-masing memiliki varian `hover` dan `focus` juga varian
 untuk masing-masing ukuran layar. Untuk warna saja tailwindcss membuat 4185 class
 dari total 8271 total class pada _default build_[^3]. Cara mengurangi palet warna
-adalah dengan mengubah `tailwind.config.js` dan membuat palet warna baru yang 
-mereferensi palet default. 
+adalah dengan mengubah `tailwind.config.js` dan membuat palet warna baru yang
+mereferensi palet default.
 
 ```js
 // tailwind.config.js
@@ -157,7 +158,7 @@ module.exports = {
 }
 ```
 
-Konfigurasi di atas membuat css yang dihasilkan tailwind hanya terdiri dari 
+Konfigurasi di atas membuat css yang dihasilkan tailwind hanya terdiri dari
 warna hitam, putih, abu-abu, dan indigo.
 
 ##### Membatasi Breakpoint
@@ -187,7 +188,7 @@ module.exports = {
 }
 ```
 
-Konfigurasi di atas membatasi class _breakpoint_ menjadi hanya satu dari yang 
+Konfigurasi di atas membatasi class _breakpoint_ menjadi hanya satu dari yang
 semula 4.
 
 ```js
@@ -213,11 +214,11 @@ module.exports = {
 ```
 
 #### Menggunakan PurgeCSS
-PurgeCss merupakan plugin lain dari postcss yang dapat menghilangkan css class 
-yang tidak terpakai. Untuk menggunakan PurgeCss pertama install PurgeCss dengan 
+PurgeCss merupakan plugin lain dari postcss yang dapat menghilangkan css class
+yang tidak terpakai. Untuk menggunakan PurgeCss pertama install PurgeCss dengan
 cara:
 
-```
+```shell
 npm install @fullhuman/postcss-purgecss --save-dev
 ```
 
@@ -244,7 +245,7 @@ module.exports = {
 }
 ```
 
-Contoh di atas memastikan bahwa PurgeCss hanya berjalan apabila _environment_ 
+Contoh di atas memastikan bahwa PurgeCss hanya berjalan apabila _environment_
 `HUGO_ENV` adalah `production`. PurgeCss menggunakan `extractors` untuk dapat
 menemukan teks di template yang merupakan `class` css. Contoh di atas menggunakan
 custom extractors untuk menemukan semua class yang di-_generate_ tailwindcss[^5].

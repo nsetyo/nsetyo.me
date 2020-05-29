@@ -1,0 +1,17 @@
+baseURL     : /
+title       : nsetyo.
+theme       : esteye-hugo-theme
+languageCode: id
+languageName: Indonesian
+copyright: "© 2007-{year} Setyo. All rights reserved."
+
+canonifyURLs: false
+disableHugoGeneratorInject: true
+enableEmoji: true
+enableRobotsTXT: true
+footnoteReturnLinkContents: ↩
+MetaDataFormat: yaml
+paginate: 5
+
+minify:
+  minifyOutput: true

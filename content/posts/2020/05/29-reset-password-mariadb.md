@@ -21,10 +21,10 @@ catat di sini agar suatu saat saya lupa lagi, saya tau kemana harus mencari.
 $ sudo systemctl stop mariadb
 ```
 
-#### 2. Restart dengan opsi skip password
+#### 2. Restart dengan opsi skip password dan networking
 
 ```
-$ sudo mysqld_safe --skip-grant-tables &
+$ sudo mysqld_safe --skip-grant-tables --skip-networking &
 ```
 
 #### 3. Sambungkan ulang server dengan akun root
@@ -35,21 +35,36 @@ $ mysql -u root
 
 #### 4. Gunakan perintah berikut untuk me-_reset_ password
 
-```sql
-use mysql;
-
-update user SET PASSWORD=PASSWORD("passwordbaru") WHERE USER='root';
-
-flush privileges;
-
-exit
 ```
+mysql> FLUSH PRIVILEGES;
+```
+
+```
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'passwordbaru';
+```
+
+```
+mysql> FLUSH PRIVILEGES;
+```
+
 
 #### 5. Mulai ulang database server
 
+Pertama `kill` proses yang sebelumnya dijalankan manual.
+
+Untuk mysql:
+```
+$ sudo kill `cat /var/run/mysqld/mysqld.pid`
+```
+Untuk mariadb:
+```
+$ sudo kill `/var/run/mariadb/mariadb.pid`
+```
+
+Jalankan ulang database service
 ```
 $ sudo systemctl start mariadb
 ```
 
 
-Voila ✨
+Voilà :sparkles:
