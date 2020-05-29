@@ -4,6 +4,7 @@ variables:
   HUGO_VERSION : "0.71.1"
   HUGO_CHECKSUM: "3a2a5fb60a0ea52544bf00c34e2c56a17aeb991390383ab42ebbd1dfd9976f23"
   HUGO_ENV     : "production"
+  THEME        : "esteye-hugo-theme"
 
 cache:
   key: apt-cache
@@ -19,16 +20,17 @@ before_script:
   - apt update && apt -o dir::cache::archives="$APT_CACHE_DIR" install --no-install-recommends  -yqq curl ca-certificates
   - curl -sL https://deb.nodesource.com/setup_12.x | bash -
   - apt update && apt -o dir::cache::archives="$APT_CACHE_DIR" install --no-install-recommends -yqq openssl nodejs git
+  - npm install -g postcss-cli autoprefixer postcss-import
+  - curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION\_Linux-64bit.tar.gz
+  - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
+  - tar xzvf hugo.tar.gz && cp ./hugo /usr/bin/hugo
+  - hugo version
   - git submodule sync --recursive
   - git submodule update --init --recursive
 
 build:
   stage : build
   script:
-    - curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_extended_$HUGO_VERSION\_Linux-64bit.tar.gz
-    - echo "$HUGO_CHECKSUM  hugo.tar.gz" | sha256sum -c
-    - tar xzvf hugo.tar.gz && cp ./hugo /usr/bin/hugo
-    - hugo version
     - hugo --minify -d public
   artifacts:
     paths:
