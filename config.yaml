@@ -1,8 +1,6 @@
-title: nsetyo.
-copyright: "© 2007-{year} Setyo. All rights reserved."
-
 baseURL: /
 canonifyURLs: false
+copyright: "© 2007-{year} Setyo. All rights reserved."
 disableHugoGeneratorInject: true
 enableEmoji: true
 enableRobotsTXT: true
@@ -12,6 +10,7 @@ languageName: Indonesian
 MetaDataFormat: yaml
 paginate: 5
 theme: sty
+title: nsetyo.
 
 markup:
   highlight:
