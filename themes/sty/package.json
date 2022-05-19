@@ -1,0 +1,26 @@
+{
+    "name": "esteye-hugo-theme",
+    "version": "0.1.0",
+    "description": "Esteye Hugo Theme",
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nsetyo/esteye-hugo-theme.git"
+    },
+    "keywords": [
+        "hugo",
+        "themes"
+    ],
+    "author": "nsetyo",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/nsetyo/esteye-hugo-theme/issues"
+    },
+    "homepage": "https://github.com/nsetyo/esteye-hugo-theme#readme",
+    "devDependencies": {
+        "postcss-cli": "^7.1.1",
+        "postcss-import": "^12.0.1",
+        "tailwindcss": "^1.4.6"
+    }
+}

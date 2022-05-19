@@ -1,0 +1,25 @@
+<div class="z-30 relative w-full sm:w-auto flex justify-between">
+    <h1 class="font-bold text-3xl leading-normal"><a href="/" class="hover:text-primary">{{ .Site.Title }}</a></h1>
+    <div class="flex sm:invisible sm:hidden">
+        <a id="showmenu" class="menu-toggler flex items-center hover:text-primary" href="#navigation">
+            <svg class="block w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 459 459">
+                <path d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z" />
+            </svg>
+        </a>
+        <a id="closemenu" class="menu-toggler items-center flex hidden hover:text-primary" href="#">
+            <svg class="block w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357">
+                <path
+                    d="M357 35.7L321.3 0 178.5 142.8 35.7 0 0 35.7l142.8 142.8L0 321.3 35.7 357l142.8-142.8L321.3 357l35.7-35.7-142.8-142.8z" />
+            </svg>
+        </a>
+    </div>
+</div>
+<nav class="hidden sm:block fixed sm:relative bg-white z-20 inset-0 pt-16 sm:p-0">
+    <div class="font-semibold uppercase tracking-wide max-w-xl mx-auto p-6 sm:p-0">
+        {{ range .Site.Menus.navigation }}
+        <a class="block sm:inline mb-8 sm:mb-0 hover:text-primary sm:hover:text-black sm:ml-6 sm:text-sm sm:text-gray"
+            href="{{ .URL }}" title="{{ .Title }}"> {{ .Name }}
+        </a>
+        {{ end }}
+    </div>
+</nav>

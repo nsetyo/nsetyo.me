@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+    {{- partial "meta.html"       . -}}
+    {{- partial "favicons.html"   . -}}
+    {{- partial "rssfeed.html"    . -}}
+    {{- partial "stylesheet.html" . -}}
+
+    <title> {{ block "title" . }} {{ .Site.Title }} {{ end }}</title>
+</head>
+
+<body class="font-sans text-default antialiased leading-tight {{.Kind}}">
+    <header class="w-full fixed bg-white z-20">
+        <div id="progress" class="w-full h-px opacity-50" style="--progress:0"></div>
+        <div id="navigation" class="container pt-2 pb-3 max-w-xl flex items-center justify-between">
+            {{- partial "header.html"     . -}}
+        </div>
+    </header>
+    <main class="pt-16">
+        <div class="container max-w-xl">
+            {{- block "main" . -}} {{- end -}}
+        </div>
+    </main>
+    <footer>
+        <div class="container max-w-xl">
+            {{- partial "footer.html"      . -}}
+        </div>
+    </footer>
+    {{- partial "javascripts.html" . -}}
+</body>
+
+</html>

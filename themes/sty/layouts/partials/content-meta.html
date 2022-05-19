@@ -1,0 +1,31 @@
+<div class="content-meta my-2 text-sm text-gray font-semibold uppercase tracking-wide">
+    <span>
+        <time datetime="{{ .Date }}"> {{ .Date.Format "Mon, 2 January 2006" }} </time>
+    </span>
+
+    {{- $author := .Site.Params.author -}}
+    {{- if isset .Params "author" -}} {{- $author = .Params.author -}} {{- end -}}
+
+    {{- if $author -}}
+    <span class="ml-1"> by <a href="/">{{ $author }}</a> </span>
+    {{- end -}}
+
+    {{- $categories := .Params.categories -}}
+    {{- $is_array   := isset .Params.categories "-1" -}}
+    {{- if $categories -}}
+    <span class="ml-1">
+        on
+        {{- if $is_array -}}
+        {{ range $index, $el := $categories }}
+        <a class="mr-1" href='{{ "/categories/" | relLangURL }}{{ . | urlize }}'>
+            {{ . }}{{if lt (add $index 1) (len $categories)}},{{end}}
+        </a>
+        {{ end }}
+        {{- else -}}
+        <a class="mr-1" href='{{ "/categories/" | relLangURL }}{{ $categories | urlize }}'>
+            {{ $categories }}
+        </a>
+        {{- end -}}
+    </span>
+    {{ end }}
+</div>

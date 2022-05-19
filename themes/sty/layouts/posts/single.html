@@ -1,0 +1,13 @@
+{{ define "title" }}
+{{ .Title }} &ndash; {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<article class="content mt-12 leading-normal">
+    <h2 class="content-header">{{ .Title }}</h2>
+
+    {{- partial "content-meta.html" . -}}
+
+    <div class="content-body leading-relaxed"> {{ .Content }} </div>
+</article>
+{{ end }}

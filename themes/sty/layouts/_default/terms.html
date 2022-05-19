@@ -1,0 +1,19 @@
+{{- define "title" -}}
+{{ .Title }} &ndash; {{ .Site.Title }}
+{{- end -}}
+
+{{- define "main" -}}
+<article class="content my-12 leading-normal">
+    <h2 class="content-header"> List of {{ .Title }} </h2>
+    <div class="content-body leading-relaxed ">
+        <ol> {{- range .Data.Terms.Alphabetical -}}
+            <li class="mb-4">
+                <a class="font-semibold font-header" href="{{ .Page.Permalink }}">
+                    {{ .Page.Title }} ({{ .Count}})
+                </a>
+            </li>
+            {{- end -}}
+        </ol>
+    </div>
+</article>
+{{- end -}}
