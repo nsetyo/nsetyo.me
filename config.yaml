@@ -1,0 +1,38 @@
+title: nsetyo.
+copyright: "© 2007-{year} Setyo. All rights reserved."
+
+baseURL: /
+canonifyURLs: false
+disableHugoGeneratorInject: true
+enableEmoji: true
+enableRobotsTXT: true
+footnoteReturnLinkContents: ↩
+languageCode: id
+languageName: Indonesian
+MetaDataFormat: yaml
+paginate: 5
+theme: sty
+
+markup:
+  highlight:
+    codeFences: true
+    guessSyntax: true
+menus:
+  navigation:
+    - name: Articles
+      url: /posts/
+      weight: 1
+    - name: By Categories
+      url: /categories/
+      weight: 2
+    - name: Projects
+      url: /projects/
+      weight: 3
+    - name: Contact
+      url: /contact/
+      weight: 100
+minify:
+  minifyOutput: true
+params:
+  canonicalUrl: https://nsetyo.id
+  description: Catatan nsetyo! Sebuah catatan pribadi, tidak kurang, apalagi lebih.

@@ -1,0 +1,1 @@
+export PATH=/var/www/themes/sty/node_modules/.bin:$PATH

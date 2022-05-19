@@ -1,3 +1,0 @@
-{{ $css := resources.Get "css/style.css" | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
-
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
