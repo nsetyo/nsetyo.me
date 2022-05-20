@@ -1,22 +1,26 @@
-<nav class="my-12 flex w-auto text-sm uppercase">
-    {{- if .Paginator.HasPrev -}}
-    <a class="bg-transparent font-bold py-2 w-24 text-left hover:text-primary"
-        href="{{ .Paginator.Prev.URL | absURL }}">
-        Previous
-    </a>
-    {{- end -}}
+<nav class="my-12 grid grid-cols-3 w-auto text-sm uppercase font-bold">
+    {{ if .Paginator.HasPrev }}
+        <div class="col-start-1 py-2">
+            <a class="hover:text-indigo-500" href="{{ .Paginator.Prev.URL }}">
+                Previous
+            </a>
+        </div>
+    {{ end }}
 
-    {{- if gt .Paginator.TotalPages 0 -}}
-    <span class="font-semibold text-gray p-2 w-auto flex-1 text-center
-    {{ if not .Paginator.HasPrev }} ml-24 {{ end }}
-    {{ if not .Paginator.HasNext }} mr-24 {{ end }}
-    ">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
-    {{- end -}}
+    {{ if gt .Paginator.TotalPages 0 }}
+        <span class="col-start-2 text-gray-500 p-2 text-center font-semibold">
+            Page
+            {{ .Paginator.PageNumber }}
+            of
+            {{ .Paginator.TotalPages }}
+        </span>
+    {{ end }}
 
-    {{- if .Paginator.HasNext -}}
-    <a class="bg-transparent font-bold py-2 w-24 text-right hover:text-primary"
-        href="{{ .Paginator.Next.URL | absURL }}">
-        Next
-    </a>
-    {{- end -}}
+    {{ if .Paginator.HasNext }}
+        <div class="col-start-3 py-2 text-right">
+            <a class="hover:text-indigo-500" href="{{ .Paginator.Next.URL }}">
+                Next
+            </a>
+        </div>
+    {{ end }}
 </nav>

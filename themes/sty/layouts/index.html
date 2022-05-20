@@ -1,0 +1,13 @@
+{{ define "main" }}
+    <section class="mt-12 leading-normal">
+        {{ $paginated := .Paginate (where .Site.RegularPages "Section" "posts") }}
+        <ul class="mt-12 leading-normal">
+            {{ range $paginated.Pages }}
+                <li>
+                    {{ partial "summary.html" . }}
+                </li>
+            {{ end }}
+        </ul>
+    </section>
+    {{ partial "pagination.html" . }}
+{{ end }}

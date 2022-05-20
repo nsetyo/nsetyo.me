@@ -1,0 +1,16 @@
+@import "tailwindcss/base";
+@import "hl";
+@import "fonts";
+
+.footnote-ref:before {
+    content: "[";
+    margin-left: 1px;
+}
+
+.footnote-ref:after {
+    content: "]";
+}
+
+sup[id*="fnref:"] {
+    scroll-margin-top: 5rem;
+}

@@ -1,5 +1,7 @@
+node_modules/
 public/
 resources/
 .cache
+.env
 .hugo_build.lock
 .vscode-server

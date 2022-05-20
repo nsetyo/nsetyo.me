@@ -1,44 +1,43 @@
-version: "3"
+version: '3'
 ### Service Network ############################################################
 services:
-  node-setup:
-    command: bash -c 'pnpm install'
-    image: nsetyo-id
-    working_dir: /var/www/themes/sty
-    volumes:
-      - ./.bashrc:/root/.bashrc
-      - ./.cache/pnpm-store:/root/.pnpm-store
-      - ./.cache/pnpm:/root/.cache/pnpm
-      - ./:/var/www/
-  www:
-    image: nsetyo-id
-    depends_on:
-      - node-setup
-    build:
-      dockerfile: ./.dockerfile
-      context: .
-      args:
-        - NODEJS_VERSION=16.15
-        - HUGO_VERSION=0.99.1
-        - HUGO_CHECKSUM=f930fcc5559337233d24de3704a09b877a6cd29449241b69e111e10b24f6e200
-    command: hugo server --bind 0.0.0.0
-    networks:
-      - public
-    expose:
-      - 1313
-    volumes:
-      - ./.bashrc:/root/.bashrc
-      - ./.cache/pnpm-store:/root/.pnpm-store
-      - ./.cache/pnpm:/root/.cache/pnpm
-      - ./.git:/var/www/.git
-      - ./.vscode-server/node:/root/.vscode-server
-      - ./:/var/www/
-      - /home/nsetyo/.gnupg:/root/.gnupg
-      - /home/nsetyo/.ssh:/root/.ssh
-    labels:
-      caddy.reverse_proxy: "{{upstreams 1313}}"
-      caddy: nsetyo.localhost
+    node-setup:
+        command: bash -c 'pnpm install'
+        image: nsetyo-id
+        volumes:
+            - ./.bashrc:/root/.bashrc
+            - ./.cache/pnpm-store:/root/.pnpm-store
+            - ./.cache/pnpm:/root/.cache/pnpm
+            - ./:/var/www/
+    www:
+        image: nsetyo-id
+        depends_on:
+            - node-setup
+        build:
+            dockerfile: ./.dockerfile
+            context: .
+            args:
+                - NODEJS_VERSION=16.15
+                - HUGO_VERSION=0.99.1
+                - HUGO_CHECKSUM=f930fcc5559337233d24de3704a09b877a6cd29449241b69e111e10b24f6e200
+        command: hugo server --bind 0.0.0.0 --liveReloadPort 443 --disableFastRender
+        networks:
+            - public
+        expose:
+            - 1313
+        volumes:
+            - ./.bashrc:/root/.bashrc
+            - ./.cache/pnpm-store:/root/.pnpm-store
+            - ./.cache/pnpm:/root/.cache/pnpm
+            - ./.git:/var/www/.git
+            - ./.vscode-server/node:/root/.vscode-server
+            - ./:/var/www/
+            - /home/nsetyo/.gnupg:/root/.gnupg
+            - /home/nsetyo/.ssh:/root/.ssh
+        labels:
+            caddy.reverse_proxy: '{{upstreams 1313}}'
+            caddy: nsetyo.localhost
 networks:
-  public:
-    external:
-      name: caddy
+    public:
+        external:
+            name: caddy

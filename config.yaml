@@ -1,6 +1,6 @@
 baseURL: /
 canonifyURLs: false
-copyright: "© 2007-{year} Setyo. All rights reserved."
+copyright: © 2007-Today / Setyo. All rights reserved.
 disableHugoGeneratorInject: true
 enableEmoji: true
 enableRobotsTXT: true
@@ -10,28 +10,27 @@ languageName: Indonesian
 MetaDataFormat: yaml
 paginate: 5
 theme: sty
-title: nsetyo.
+title: nsetyo.id
 
+author:
+    name: Setyo Nugroho
+    email: setyo@pm.me
 markup:
-  highlight:
-    codeFences: true
-    guessSyntax: true
+    highlight:
+        codeFences: true
+        guessSyntax: true
+        noClasses: false
 menus:
-  navigation:
-    - name: Articles
-      url: /posts/
-      weight: 1
-    - name: By Categories
-      url: /categories/
-      weight: 2
-    - name: Projects
-      url: /projects/
-      weight: 3
-    - name: Contact
-      url: /contact/
-      weight: 100
+    navigation:
+        - name: Archive
+          url: /posts/
+          weight: 1
+        - name: About
+          url: https://youtube.com/watch?v=dQw4w9WgXcQ
+          weight: 2
 minify:
-  minifyOutput: true
+    minifyOutput: true
 params:
-  canonicalUrl: https://nsetyo.id
-  description: Catatan nsetyo! Sebuah catatan pribadi, tidak kurang, apalagi lebih.
+    canonicalUrl: https://nsetyo.id
+    description:
+        Catatan nsetyo! Sebuah catatan pribadi, tidak kurang, apalagi lebih.

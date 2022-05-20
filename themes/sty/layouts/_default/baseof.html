@@ -1,39 +1,114 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-<head>
-    {{- partial "meta.html"       . -}}
-    {{ $css := resources.Get "css/style.css" | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="ie=edge" http-equiv="X-UA-Compatible" />
 
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-    <link rel="icon" type="image/png" sizes="24x24" href='{{ "images/favicon.png" | relURL }}'>
+        {{ if .Params.noindex }}
+            <meta content="noindex" name="robots" />
+        {{ end }}
+        {{ $desc := plainify (.Params.description | default .Summary | default .Site.Params.description) }}
+        {{ if gt (len $desc) (.Site.Params.descLength | default 150) }}
+            {{ $desc = substr $desc 0 (.Site.Params.descLength | default 150) }}
+            {{ $desc = delimit (slice $desc "...") "" }}
+        {{ end }}
 
-    <title> {{ block "title" . }} {{ .Site.Title }} {{ end }}</title>
 
-    {{ range .AlternativeOutputFormats -}}
-        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
-    {{ end -}}
-</head>
+        <meta content="{{ chomp $desc }}" name="description" />
 
-<body class="font-sans text-default antialiased leading-tight {{.Kind}}">
-    <header class="w-full fixed bg-white z-20">
-        <div id="progress" class="w-full h-px opacity-50" style="--progress:0"></div>
-        <div id="navigation" class="container pt-2 pb-3 max-w-xl flex items-center justify-between">
-            {{- partial "header.html"     . -}}
-        </div>
-    </header>
-    <main class="pt-16">
-        <div class="container max-w-xl">
-            {{- block "main" . -}} {{- end -}}
-        </div>
-    </main>
-    <footer>
-        <div class="container max-w-xl">
-            <p class="text-center mt-12 mb-6 text-gray">
-                {{ replace .Site.Copyright "{year}" now.Year }}
-            </p>
-        </div>
-    </footer>
-    {{- partial "javascripts.html" . -}}
-</body>
+        {{ $canonicalurl := .Permalink | absURL }}
+        {{ if isset .Params "canonicalurl" }}
+            {{ $canonicalurl = .Params "canonicalurl" }}
+        {{ else if isset .Site.Params "canonicalurl" }}
+            {{ if isset .Params "url" }}
+                {{ $canonicalurl = (delimit (slice .Site.Params.canonicalurl .Params.url ) "") }}
+            {{ else }}
+                {{ $canonicalurl = (delimit (slice .Site.Params.canonicalurl .RelPermalink ) "") }}
+            {{ end }}
+        {{ end }}
 
+
+        <link href="{{ $canonicalurl }}" rel="canonical" />
+
+        {{ $base := resources.Get "css/base.css"  | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
+        <link
+            defer
+            href="{{ $base.RelPermalink }}"
+            integrity="{{ $base.Data.Integrity }}"
+            rel="stylesheet"
+        />
+
+        {{ $css  := resources.Get "css/style.css" | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
+        {{ $options := dict "config" "nojs/postcss.config.js" }}
+        {{ $nojs  := resources.Get "css/nojs.css" | resources.PostCSS $options | resources.Minify | resources.Fingerprint "sha256" }}
+        <link
+            defer
+            href="{{ $css.RelPermalink }}"
+            integrity="{{ $css.Data.Integrity }}"
+            rel="stylesheet"
+        />
+        <noscript>
+            <link
+                href="{{ $nojs.RelPermalink }}"
+                integrity="{{ $nojs.Data.Integrity }}"
+                rel="stylesheet"
+            />
+        </noscript>
+
+        {{ $favicon := resources.Get "imgs/favicon.png" | resources.Fingerprint "sha256" }}
+        <link
+            href="{{ $favicon.RelPermalink }}"
+            rel="icon"
+            sizes="24x24"
+            type="image/png"
+        />
+
+        <title>
+            {{- if ne .Title .Site.Title -}}
+                {{ .Title }}&nbsp;&ndash;&nbsp;{{ .Site.Title }}
+            {{- else -}}
+                Blog&nbsp;&ndash;&nbsp;{{ .Site.Title }}
+            {{- end -}}
+        </title>
+
+        {{ range .AlternativeOutputFormats }}
+            {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
+        {{ end }}
+    </head>
+
+    <body
+        class="{{ .Kind }} bg-white font-sans leading-tight text-gray-900 antialiased dark:bg-gray-900 dark:text-white"
+    >
+        {{ partialCached "header.html" . }}
+        <main class="container mx-auto max-w-xl pt-16">
+            {{ block "main" . }}{{ end }}
+        </main>
+        <footer class="container max-w-xl mx-auto flex mt-20 mb-6 text-sm">
+            <div>
+                {{ .Site.Copyright }}
+            </div>
+            <div class="ml-auto">
+                <a
+                    class="hover:text-indigo-500"
+                    href="https://github.com/nsetyo"
+                    >Github</a
+                >
+                <span> · </span>
+                <a
+                    class="hover:text-indigo-500"
+                    href="https://gitlab.com/nsetyo"
+                    >Gitlab</a
+                >
+            </div>
+        </footer>
+    </body>
+
+    {{ $js := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint "sha256" }}
+    <script
+        defer
+        integrity="{{ $js.Data.Integrity }}"
+        src="{{ $js.RelPermalink }}"
+        type="text/javascript"
+    ></script>
 </html>

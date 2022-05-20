@@ -1,11 +1,11 @@
 {{ define "title" }}
-{{ .Title }} &ndash; {{ .Site.Title }}
+    {{ .Title }}&nbsp;&ndash;&nbsp;{{ .Site.Title }}
 {{ end }}
 
 {{ define "main" }}
-<article class="content mt-12 leading-normal">
-    <h2 class="content-header font-sans">{{ .Title }}</h2>
+    <article class="prose mt-12 leading-normal dark:prose-invert">
+        <h1 class="m-0">{{ .Title }}</h1>
 
-    <div class="content-body leading-relaxed"> {{ .Content }} </div>
-</article>
+        <div class="content-body leading-relaxed">{{ .Content }}</div>
+    </article>
 {{ end }}

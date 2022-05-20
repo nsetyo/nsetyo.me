@@ -1,11 +1,11 @@
 ---
 title: Reset root password MySQL/MariaDB
 categories:
-  - GNU/Linux
+    - GNU/Linux
 tags:
-  - Database
-  - MariaDB
-  - MySQL
+    - Database
+    - MariaDB
+    - MySQL
 date: 2020-05-29
 ---
 
@@ -47,24 +47,26 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'passwordbaru';
 mysql> FLUSH PRIVILEGES;
 ```
 
-
 #### 5. Mulai ulang database server
 
 Pertama `kill` proses yang sebelumnya dijalankan manual.
 
 Untuk mysql:
+
 ```
 $ sudo kill `cat /var/run/mysqld/mysqld.pid`
 ```
+
 Untuk mariadb:
+
 ```
 $ sudo kill `/var/run/mariadb/mariadb.pid`
 ```
 
 Jalankan ulang database service
+
 ```
 $ sudo systemctl start mariadb
 ```
-
 
 Voilà :sparkles:

@@ -1,0 +1,23 @@
+<article class="mb-12">
+    <h2 class="mt-8 text-3xl font-semibold">
+        <a class="hover:text-indigo-500" href="{{ .RelPermalink }}">
+            {{ .Title }}
+        </a>
+    </h2>
+
+    {{ partial "content-meta.html" . }}
+
+
+    <div class="leading-relaxed prose dark:prose-invert">
+        {{ .Summary }}
+    </div>
+
+    <div class="text-right mt-4">
+        <a
+            class="flex-none hover:text-gray-900 dark:hover:text-gray-200 font-semibold text-indigo-500"
+            href="{{ .RelPermalink }}"
+        >
+            Read this post &rarr;
+        </a>
+    </div>
+</article>
