@@ -9,13 +9,12 @@ tags:
 
 Kelanjutan dari tulisan saya
 [sebelumnya](/posts/2017/04/17-install-android-studio). Terdapat kendala saat
-mencoba menjalankan Android Virtual Device (AVD) melalui Android Studio.
-
-<!--more-->
-
-AVD tidak berjalan setelah ditekan tombol run seperti pada gambar.
+mencoba menjalankan Android Virtual Device (AVD) melalui Android Studio. AVD
+tidak berjalan setelah ditekan tombol run seperti pada gambar.
 
 ![Android Virtual Device Manager](images/avd.png)
+
+<!--more-->
 
 AVD tidak berjalan dan tidak ada galat (_error_) yang ditam­pil­kan. Untuk
 mengetahui permasalahan yang terjadi baiknya kita menjalankan AVD melalui

@@ -7,9 +7,9 @@ Setelah sebelumnya saya membuat artikel tentang https, saya jadi menyadari kalau
 Mozilla Firefox sekarang akan menampilkan icon gembok berwarna abu-abu untuk
 laman https alih-alih gembok hijau[^1].
 
-<!--more-->
-
 ![Display of https website in firefox before and after change](images/identity_icons.png)
+
+<!--more-->
 
 Saya pribadi lebih menyukai https digambarkan dengan icon gembok berwarna hijau,
 jadi untuk mengembalikannya saya mengubah konfigurasi `about:config` pada key

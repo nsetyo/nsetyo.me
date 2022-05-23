@@ -1,0 +1,15 @@
+<p>
+    {{ if not (hasPrefix .Destination "http") }}
+        <img
+            {{ with .Title }}title="{{ . }}"{{ end }}
+            alt="{{ .Text }}"
+            src="{{ .Page.RelPermalink }}{{ .Destination | safeURL }}"
+        />
+    {{ else }}
+        <img
+            {{ with .Title }}title="{{ . }}"{{ end }}
+            alt="{{ .Text }}"
+            src="{{ .Destination | safeURL }}"
+        />
+    {{ end }}
+</p>

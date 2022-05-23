@@ -5,7 +5,7 @@
             Archive
         </h2>
         <ul class="list-none pl-0 mt-8 space-y-4">
-            {{ range .Pages }}
+            {{ range (.Paginator 10).Pages }}
                 <li class="pl-0">
                     <span
                         class="block opacity-75 uppercase font-semibold text-xs tracking-wide"
@@ -24,4 +24,5 @@
             {{ end }}
         </ul>
     </article>
+    {{ partial "pagination.html" . }}
 {{ end }}
