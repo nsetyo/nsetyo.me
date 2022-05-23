@@ -1,11 +1,8 @@
 ---
-title      : Membangkitkan kunci SSH di Linux
-categories :
- - GNU/Linux
-tags :
- - Command Line
- - SSH
-date : 2016-03-20
+title: Membangkitkan kunci SSH di Linux
+date: 2016-03-20
+tags:
+    - GNU/Linux
 ---
 
 Apa itu SSH? Penjelasan mengenai SSH sendiri di Internet cukup banyak, salah

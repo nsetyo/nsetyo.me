@@ -1,24 +1,20 @@
 ---
-title      : Membuat Banyak Files Dengan Nama Serupa
-categories :
- - GNU/Linux
-tags :
- - Bash
- - Linux
- - Command Line
- - Shell
-date : 2016-03-30
+title: Membuat Banyak Files Dengan Nama Serupa
+date: 2016-03-30
+tags:
+    - GNU/Linux
 ---
+
 Saya pernah dihadapkan pada keadaan dimana harus membuat beberapa berkas dengan
 nama berkas yang mirip satu sama lain. Untungnya di GNU/Linux hal seperti ini
 cukup mudah dilakukan, cukup menggunakan fitur _brace expansion_ (`{` dan `}`).
 Lebih jelasnya, contoh apabila kita ingin membuat 5 buah berkas dengan nama
 
-- `autoload.config.php`
-- `database.config.php`
-- `permission.config.php`
-- `routes.config.php`
-- `type.config.php`
+-   `autoload.config.php`
+-   `database.config.php`
+-   `permission.config.php`
+-   `routes.config.php`
+-   `type.config.php`
 
 Untuk membuat semua berkas tersebut dalan satu baris perintah dapat menggunakan
 perintah:

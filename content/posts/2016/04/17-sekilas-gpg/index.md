@@ -1,24 +1,18 @@
 ---
 title: Sekilas Tentang GPG
-categories :
- - Kriptografi
- - GNU/Linux
-tags:
- - Public Key
- - Security
- - Command Line
 date: 2016-04-17
-disqus_identifier: /kriptografi/sekilas-gpg
-
+tags:
+    - Kriptografi
+    - GNU/Linux
 ---
 
-[GPG] atau _GNU Privacy Guard_, bukan [PGP], merupakan perangkat lunak yang 
-mengimple­men­tasikan [RFC4880], yang merupakan standar dari spesifikasi [OpenPGP]. 
-Setidaknya begitu yang dikatakan Wikipedia. GPG, dan perangkat lunak lain yang 
-mengadopsi OpenPGP, digu­na­kan untuk mengamankan komunikasi dengan menggunakan 
-enkripsi. Untuk menggunakan GPG terlebih dahulu kita harus memiliki kunci, yang 
-akan digunakan untuk mengenkripsi dan dekripsi. Untuk membuat pasangan kunci GPG 
-dapat menggunakan baris perintah:
+[GPG] atau _GNU Privacy Guard_, bukan [PGP], merupakan perangkat lunak yang
+mengimple­men­tasikan [RFC4880], yang merupakan standar dari spesifikasi
+[OpenPGP]. Setidaknya begitu yang dikatakan Wikipedia. GPG, dan perangkat lunak
+lain yang mengadopsi OpenPGP, digu­na­kan untuk mengamankan komunikasi dengan
+menggunakan enkripsi. Untuk menggunakan GPG terlebih dahulu kita harus memiliki
+kunci, yang akan digunakan untuk mengenkripsi dan dekripsi. Untuk membuat
+pasangan kunci GPG dapat menggunakan baris perintah:
 
 ```
 $ gpg2 --full-gen-key
@@ -35,6 +29,7 @@ Your selection?
 ```
 
 <!--more-->
+
 Tekan enter atau angka 1-4 untuk memilih algoritma kriptografi yang akan
 digunakan.
 
@@ -72,6 +67,7 @@ GnuPG needs to construct a user ID to identify your key.
 
 Real name:
 ```
+
 Isikan data yang akan digunakan. GPG juga dapat digunakan untuk mengotentikasi
 keaslian pesan, jadi pada tahap ini disarankan untuk menggunakan data
 sebenarnya, nama dan email asli.
@@ -113,17 +109,16 @@ uid         [ultimate] Setyo N ("Test") <mail@domain.com>
 sub   rsa4096/77D4D96A 2016-04-16 [] [expires: 2016-04-17]
 ```
 
-Kunci yang telah dibangkitkan akan memiliki "GPG key ID" yang
-terdiri dari 8 digit hexadecimal. Ketika menggunakan GPG Key ID,
-tambahkan `0x` sebelum ID. Untuk ekspor kunci Publik dapat
-menggunakan baris perintah
+Kunci yang telah dibangkitkan akan memiliki "GPG key ID" yang terdiri dari 8
+digit hexadecimal. Ketika menggunakan GPG Key ID, tambahkan `0x` sebelum ID.
+Untuk ekspor kunci Publik dapat menggunakan baris perintah
 
 ```
 gpg --export -a "mail@domain.com" > public.key
 ```
 
-Seperti ini isi dari kunci publik yang sudah diekspor. Kunci ini
-dapat kita berikan pada siapa saja.
+Seperti ini isi dari kunci publik yang sudah diekspor. Kunci ini dapat kita
+berikan pada siapa saja.
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -155,9 +150,9 @@ merupakan kunci yang dapat kita berikan pada siapa saja, bahkan dapat kita
 unggah di ruang publik, kontras dengan kunci privat yang harus kita jaga baik-
 baik. Apabila kita melakukan penyandian menggunakan kunci privat untuk
 membukanya (_decode_) harus menggunakan kunci publik, proses ini disebut
-_signing_ atau penandatanganan. Sebaliknya apabila kita mengenkripsi
-menggunakan kunci Publik untuk membukanya harus menggunakan kunci privat, ini
-merupakan proses enkripsi.
+_signing_ atau penandatanganan. Sebaliknya apabila kita mengenkripsi menggunakan
+kunci Publik untuk membukanya harus menggunakan kunci privat, ini merupakan
+proses enkripsi.
 
 Proses _signing_ digunakan untuk menjaga integritas data dan memastikan data
 yang diterima oleh penerima pesan benar merupakan dari pengirim yang sesuai.
@@ -169,21 +164,21 @@ menggunakan kunci yang sudah kita buat sebelumnya.
 $ gpg --sign-with "mail@domain.com" --sign Dokumen.pdf
 ```
 
-Perintah di atas akan menghasilkan Dokumen.pdf.gpg . Berkas *.gpg tersebut
-merupakan hasil penyandian menggunakan kunci privat. Berkas tersebut juga
-berisi dokumen aslinya. Umumnya tanda tangan GPG hanya berisi data tanda tangan
-dengan dokumen asli terpisah. Untuk membuat tanda tangan terpisah dapat
-menggunakan `--detach-sign`.
+Perintah di atas akan menghasilkan Dokumen.pdf.gpg . Berkas \*.gpg tersebut
+merupakan hasil penyandian menggunakan kunci privat. Berkas tersebut juga berisi
+dokumen aslinya. Umumnya tanda tangan GPG hanya berisi data tanda tangan dengan
+dokumen asli terpisah. Untuk membuat tanda tangan terpisah dapat menggunakan
+`--detach-sign`.
 
 ```
 $ gpg --sign-with "mail@domain.com" --detach-sign Dokumen.pdf
 ```
 
-Baris perintah di atas akan menghasilkan Dokumen.pdf.sig, berkas
-Dokumen.pdf.sig ini merupakan berkas tanda tangan yang dapat digunakan untuk
-memeriksa apakah Dokumen.pdf benar merupakan berkas yang dikirim oleh
-mail@domain.com. Untuk verifikasi tanda tangan, penerima yang telah memiliki
-kunci publik mail@domain.com dapat menggunakan baris perintah:
+Baris perintah di atas akan menghasilkan Dokumen.pdf.sig, berkas Dokumen.pdf.sig
+ini merupakan berkas tanda tangan yang dapat digunakan untuk memeriksa apakah
+Dokumen.pdf benar merupakan berkas yang dikirim oleh mail@domain.com. Untuk
+verifikasi tanda tangan, penerima yang telah memiliki kunci publik
+mail@domain.com dapat menggunakan baris perintah:
 
 ```
 $ gpg -v --verify Dokumen.pdf.sig Dokumen.pdf
@@ -193,12 +188,11 @@ gpg: Good signature from "Setyo N ("Test") <mail@domain.com>" [ultimate]
 gpg: binary signature, digest algorithm SHA256, key algorithm rsa4096
 ```
 
-Baris perintah di atas berhasil dengan asumsi penerima telah
-memasukkan kunci publik mail@domain.com ke dalam keyring miliknya.
-Dengan menambahkan kunci publik ke dalam keyring kita, kita telah
-memberi tanda jika kunci publik tersebut terpercaya. Untuk
-menambahkan kunci publik ke dalam keyring dapat menggunakan
-perintah:
+Baris perintah di atas berhasil dengan asumsi penerima telah memasukkan kunci
+publik mail@domain.com ke dalam keyring miliknya. Dengan menambahkan kunci
+publik ke dalam keyring kita, kita telah memberi tanda jika kunci publik
+tersebut terpercaya. Untuk menambahkan kunci publik ke dalam keyring dapat
+menggunakan perintah:
 
 ```
 $ gpg --import public.key
@@ -207,9 +201,9 @@ gpg: Total number processed: 1
 gpg:               imported: 1
 ```
 
-Dengan `public.key` merupakan kunci publik yang telah diekspor dan diterima
-oleh penerima berkas. Atau kita juga dapat melakukan verifikasi tanpa melakukan
-impor atau menambahkan kunci publik pada keyring kita, yang pertama kita harus
+Dengan `public.key` merupakan kunci publik yang telah diekspor dan diterima oleh
+penerima berkas. Atau kita juga dapat melakukan verifikasi tanpa melakukan impor
+atau menambahkan kunci publik pada keyring kita, yang pertama kita harus
 mengubah kunci publik yang diterima dari ascii armored menjadi binary format:
 
 ```
@@ -226,20 +220,19 @@ gpg: Signature made Sun 17 Apr 2016 01:19:05 PM WIB using RSA key ID 35704B61
 gpg: Good signature from "Setyo N ("Test") <mail@domain.com>"
 ```
 
-Berikutnya adalah enkripsi. Orang yang telah menerima kunci
-publik milik kita dapat melakukan enkripsi berkas menggunakan
-kunci publik tersebut dan hanya kita yang dapat membuka berkas
-tersebut. Untuk melakukan enkripsi dapat menggunakan baris
-perintah:
+Berikutnya adalah enkripsi. Orang yang telah menerima kunci publik milik kita
+dapat melakukan enkripsi berkas menggunakan kunci publik tersebut dan hanya kita
+yang dapat membuka berkas tersebut. Untuk melakukan enkripsi dapat menggunakan
+baris perintah:
 
 ```
 $ gpg --encrypt --armor -r mail@domain.com berkasrahasia.txt
 ```
 
-Baris perintah tersebut akan menghasilkan berkasrahasia.txt.asc. Penggunaan
-`-r` untuk menentukan penerima berkas, sehingga akan digunakan kunci publik
-milik mail@domain.com. Baris perintah untuk enkripsi bisa dilakukan apabila
-kunci publik tersebut sudah terlebih dahulu ditambahkan pada keyring.
+Baris perintah tersebut akan menghasilkan berkasrahasia.txt.asc. Penggunaan `-r`
+untuk menentukan penerima berkas, sehingga akan digunakan kunci publik milik
+mail@domain.com. Baris perintah untuk enkripsi bisa dilakukan apabila kunci
+publik tersebut sudah terlebih dahulu ditambahkan pada keyring.
 
 Berikut isi dari `berkasrahasia.txt`
 
@@ -287,11 +280,11 @@ baris perintah pada terminal.
 # pacman -S seahorse
 ```
 
-{{< figure src="images/seahorse.png" >}}
+![An image of seahorse window](images/seahorse.png)
 
 Sekian.
 
-[RFC4880]: https://tools.ietf.org/html/rfc4880
-[OpenPGP]: https://en.wikipedia.org/wiki/OpenPGP
-[GPG]:     https://en.wikipedia.org/wiki/GNU_Privacy_Guard
-[PGP]:     https://en.wikipedia.org/wiki/Pretty_Good_Privacy
+[rfc4880]: https://tools.ietf.org/html/rfc4880
+[openpgp]: https://en.wikipedia.org/wiki/OpenPGP
+[gpg]: https://en.wikipedia.org/wiki/GNU_Privacy_Guard
+[pgp]: https://en.wikipedia.org/wiki/Pretty_Good_Privacy

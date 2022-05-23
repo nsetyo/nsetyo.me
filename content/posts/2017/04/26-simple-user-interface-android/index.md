@@ -1,19 +1,17 @@
 ---
 title: Membuat Antarmuka Sederhana Di Android
-categories:
-  - Development
-tags:
-  - Android
-  - Interface
 date: 2017-04-26T20:19:31+07:00
+tags:
+    - Android Development
 ---
-Pada tulisan ini saya akan membuat antarmuka sederhana untuk aplikasi Android. 
-Antarmuka ini nantinya akan berisi sebuah _textbox_ dan sebuah tombol 
-di sisi kanannya.
+
+Pada tulisan ini saya akan membuat antarmuka sederhana untuk aplikasi Android.
+Antarmuka ini nantinya akan berisi sebuah _textbox_ dan sebuah tombol di sisi
+kanannya.
 
 Antarmuka aplikasi android dibentuk dari _layout_ (ViewGroup Object) dan
-_widget_ (View Object) yang tersusun secara hirarkis. Layout merupakan kontainer 
-tak terlihat yang mengendalikan bagaimana objek turunannya diposisikan pada 
+_widget_ (View Object) yang tersusun secara hirarkis. Layout merupakan kontainer
+tak terlihat yang mengendalikan bagaimana objek turunannya diposisikan pada
 layar. Widget merupakan komponen antarmuka seperti textbox dan tombol.
 
 <!--more-->
@@ -21,8 +19,7 @@ layar. Widget merupakan komponen antarmuka seperti textbox dan tombol.
 ### 1. Persiapan:
 
 1. Buat [project baru][1].
-2. Buka berkas `app > res > layout > activity_main.xml` yang ada pada
-   project.
+2. Buka berkas `app > res > layout > activity_main.xml` yang ada pada project.
 3. Klik tab design pada bagian bawah window.
 4. Aktifkan Blueprint (1).
 5. Aktifkan Show Constraint (2).
@@ -30,40 +27,28 @@ layar. Widget merupakan komponen antarmuka seperti textbox dan tombol.
 7. Ubah default margin menjadi 16.
 8. Hapus TextView Hello World.
 
-{{<
-    figure src="images/android-studio01.png" link="images/android-studio01.png"
-    title="Gambar 1. Interface Android Studio"
->}}
+![Gambar 1. Interface Android Studio](images/android-studio01.png)
 
 ### 2. Menambahkan Textbox
 
 #### 2.1 Menggunakan Design Editor
 
-1. Dari jendela palette di bagian kiri, pilih panel __Text__, lalu klik
-   dan tarik __Plain Text__ ke design editor. __Plain Text__ ini
-   merupakan EditText Widget yang berfungsi untuk menerima input dari
-   user.
-2. Klik _view_ (Plain Text Widget) sampai terlihat _resizing handle_,
-   berbentuk persegi, pada setiap sudut dan _constraint anchor_,
-   berbentuk lingkaran, pada setiap sisinya. Seperti terlihat pada
-   Gambar 2.
-3. Buat _Constraint_ dengan cara klik dan tarik _constraint anchor_ pada
-   sisi atas sampai bertemu dengan sisi atas layout seperti pada
-   Gambar 3. Constraint ini berfungsi untuk memastikan bahwa
-   _view object_ berada sejauh 16dp dari bagian atas layout, sesuai
-   dengan margin yang sudah ditentukan.
+1. Dari jendela palette di bagian kiri, pilih panel **Text**, lalu klik dan
+   tarik **Plain Text** ke design editor. **Plain Text** ini merupakan EditText
+   Widget yang berfungsi untuk menerima input dari user.
+2. Klik _view_ (Plain Text Widget) sampai terlihat _resizing handle_, berbentuk
+   persegi, pada setiap sudut dan _constraint anchor_, berbentuk lingkaran, pada
+   setiap sisinya. Seperti terlihat pada Gambar 2.
+3. Buat _Constraint_ dengan cara klik dan tarik _constraint anchor_ pada sisi
+   atas sampai bertemu dengan sisi atas layout seperti pada Gambar 3. Constraint
+   ini berfungsi untuk memastikan bahwa _view object_ berada sejauh 16dp dari
+   bagian atas layout, sesuai dengan margin yang sudah ditentukan.
 4. Ulangin langkah 3 untuk membuat Constraint ke bagian kiri layout.
 5. Hasil akhir terlihat seperti Gambar 3.
 
-   {{<
-       figure src="images/android-studio02.png" link="images/android-studio02.png"
-       title="Gambar 2. Resizing handle dan Constraint anchor"
-   >}}
+![Gambar 2. Resizing handle dan Constraint anchor](images/android-studio02.png)
 
-   {{<
-       figure src="images/android-studio03.png" link="images/android-studio03.png"
-       title="Gambar 3. Constraint anchor ke bagian atas dan kiri layout"
-   >}}
+![Gambar 3. Constraint anchor ke bagian atas dan kiri layout](images/android-studio03.png)
 
 #### 2.2 Menggunakan XML Editor
 
@@ -115,18 +100,15 @@ Sehingga `activity_main.xml` menjadi
 
 #### 3.1 Menggunakan Design Editor
 
-1. Dari jendela palette di bagian kiri, pilih panel __Widgets__, lalu
-   klik dan tarik __Button__ ke design editor.
+1. Dari jendela palette di bagian kiri, pilih panel **Widgets**, lalu klik dan
+   tarik **Button** ke design editor.
 2. Buat Constraint dari sisi kiri Tombol ke sisi kanan Textbox.
-3. Untuk membuat tombol dan textbox sejajar horizontal, buat Baseline
-   Constraint dengan cara klik tombol ![](images/layout-editor-action-baseline.png)
-   lalu tarik menuju _baseline anchor_ yang ada pada Textbox.
+3. Untuk membuat tombol dan textbox sejajar horizontal, buat Baseline Constraint
+   dengan cara klik tombol ![](images/layout-editor-action-baseline.png) lalu
+   tarik menuju _baseline anchor_ yang ada pada Textbox.
 4. Hasilnya akan seperti Gambar 4.
 
-{{<
-    figure src="images/android-studio04.png" link="images/android-studio04.png"
-    title="Gambar 4. Constraint Pada Tombol"
->}}
+![Gambar 4. Constraint Pada Tombol](images/android-studio04.png)
 
 #### 3.2 Menggunakan XML Editor
 
@@ -181,32 +163,26 @@ Sehingga `activity_main.xml` menjadi:
 
 ### 4. Membuat Textbox fleksibel
 
-Saat ini lebar dari textbox hanya 10ems, sehingga terdapat ruang kosong
-pada bagian kanan layar, sebelah kanan tombol, seperti terlihat pada
-Gambar 4 sebelumnya. Dengan ukuran Textbox yang fleksibel, lebar Textbox
-akan mengikuti ukuran layar sehingga dapat mengisi ruang kosong yang
-tersedia. Berikut tahapannya:
+Saat ini lebar dari textbox hanya 10ems, sehingga terdapat ruang kosong pada
+bagian kanan layar, sebelah kanan tombol, seperti terlihat pada Gambar 4
+sebelumnya. Dengan ukuran Textbox yang fleksibel, lebar Textbox akan mengikuti
+ukuran layar sehingga dapat mengisi ruang kosong yang tersedia. Berikut
+tahapannya:
 
-1. Buat Constraint dari sisi kanan tombol ke sisi kanan layout
-   menggunakan cara seperti sebelumnya, bisa juga dengan menambahkan
-   `app:layout_constraintRight_toRightOf="parent"` di bagian tombol
-   pada `activity_main.xml`.
-2. Tambahkan Constraint dari sisi kanan Textbox ke sisi kiri tombol
-   dengan menambahkan `app:layout_constraintRight_toLeftOf="@+id/button"`
-   di bagian Textbox pada `activity_main.xml`.
-3. Klik Textbox, pada __Properties Window__ klik indikator lebar object
-   (`>>`) atau (`<<`) seperti pada Gambar 5. Ubah Menjadi Match
-   Constraint seperti pada Gambar 6.
+1. Buat Constraint dari sisi kanan tombol ke sisi kanan layout menggunakan cara
+   seperti sebelumnya, bisa juga dengan menambahkan
+   `app:layout_constraintRight_toRightOf="parent"` di bagian tombol pada
+   `activity_main.xml`.
+2. Tambahkan Constraint dari sisi kanan Textbox ke sisi kiri tombol dengan
+   menambahkan `app:layout_constraintRight_toLeftOf="@+id/button"` di bagian
+   Textbox pada `activity_main.xml`.
+3. Klik Textbox, pada **Properties Window** klik indikator lebar object (`>>`)
+   atau (`<<`) seperti pada Gambar 5. Ubah Menjadi Match Constraint seperti pada
+   Gambar 6.
 
-{{<
-    figure src="images/android-studio05.png" link="images/android-studio05.png"
-    title="Gambar 5. Wrap Content Width"
->}}
+![Gambar 5. Wrap Content Width](images/android-studio05.png)
 
-{{<
-    figure src="images/android-studio06.png" link="images/android-studio06.png"
-    title="Gambar 6. Match Constraint Width"
->}}
+![Gambar 6. Match Constraint Width](images/android-studio06.png)
 
 Hasil akhir pada `activity_main.xml` adalah sebagai berikut:
 
@@ -251,18 +227,12 @@ Hasil akhir pada `activity_main.xml` adalah sebagai berikut:
 
 Selesai, antarmuka yang dihasilkan seperti pada Gambar 7. dan Gambar 8.
 
-{{<
-    figure src="images/android-studio09.png" link="images/android-studio09.png"
-    title="Gambar 7. Hasil akhir dengan orientasi potrait"
->}}
+![Gambar 7. Hasil akhir dengan orientasi potrait](images/android-studio09.png)
 
-{{<
-    figure src="images/android-studio10.png" link="images/android-studio10.png"
-    title="Gambar 8. Hasil akhir dengan orientasi landscape"
->}}
+![Gambar 8. Hasil akhir dengan orientasi landscape](images/android-studio10.png)
 
 Lebih lanjut [https://developer.android.com/training/...][2]
 
-
-[1]:https://developer.android.com/training/basics/firstapp/creating-project.html
-[2]:https://developer.android.com/training/basics/firstapp/building-ui.html
+[1]:
+    https://developer.android.com/training/basics/firstapp/creating-project.html
+[2]: https://developer.android.com/training/basics/firstapp/building-ui.html

@@ -1,17 +1,14 @@
 ---
 title: Pengaturan proxy untuk Git
-categories:
-    - GNU/Linux
-tags:
-    - Git
-    - Command Line
 date: 2016-01-23
+tags:
+    - GNU/Linux
 ---
 
 Sudah beberapa bulan ini kantor mewajibkan penggunaan _proxy_ untuk koneksi
-internet. Sebenarnya saya pribadi tidak masalah, hanya saja beberapa _port_
-ditutup karena penggunaan _proxy_ ini, salah satunya untuk git. Sudah mengatur
-_proxy_ melalui perintah `export http_proxy` pun masih belum berhasil.
+internet. Sebenarnya saya pribadi tidak masalah, hanya saja beberapa
+_port_ditutup karena penggunaan \_proxy_ ini, salah satunya untuk git. Sudah
+mengatur _proxy_ melalui perintah `export http_proxy` pun masih belum berhasil.
 
 ```
 $ export http_proxy=http://proxyhost:port

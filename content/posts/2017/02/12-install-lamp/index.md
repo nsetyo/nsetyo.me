@@ -1,13 +1,9 @@
 ---
 title: Menginstal Apache, MySQL/MariaDB, dan PHP di Debian
-categories:
-  - GNU/Linux
+date: 2017-02-12T21:45:05+07:00
 tags:
-  - Apache
-  - MySQL
-  - MariaDB
-  - PHP
-date : 2017-02-12T21:45:05+07:00
+    - GNU/Linux
+    - Web Development
 ---
 
 Berikut merupakan tahapan yang harus dilakukan untuk memasang Apache, MariaDB,
@@ -20,10 +16,10 @@ dan PHP pada komputer dengan sistem operasi GNU/Linux, khusunya Debian.
 <!--more-->
 
 Untuk memeriksa apakah instalasi apache berhasil atau tidak, buka browser lalu
-akses <http://localhost>. Apabila akses berhasil maka apache telah terpasang
-dan siap digunakan.
+akses <http://localhost>. Apabila akses berhasil maka apache telah terpasang dan
+siap digunakan.
 
-{{< figure src="images/Apache2.png" link="images/Apache2.png" >}}
+![Web browser show localhost with Apache default page](images/Apache2.png)
 
 Periksa juga status _service_ mariadb
 
@@ -62,9 +58,9 @@ phpinfo();
 
 ```
 
-Berikutnya akses http://localhost/test.php, jika berhasil maka browser
-akan menampilkan informasi seperti gambar berikut:
+Berikutnya akses http://localhost/test.php, jika berhasil maka browser akan
+menampilkan informasi seperti gambar berikut:
 
-{{< figure src="images/PHP.png" link="images/PHP.png" >}}
+![Web browser show localhost/test.php with phpinfo page](images/PHP.png)
 
 Sekian.

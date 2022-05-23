@@ -1,12 +1,9 @@
 ---
 title: Menginstal Nginx di Debian
-categories:
-  - GNU/Linux
-tags:
-  - Nginx
-  - Server
-  - PHP
 date: 2017-03-01T17:25:55+07:00
+tags:
+    - GNU/Linux
+    - Web Development
 ---
 
 Untuk menginstal nginx jalankan perintah:
@@ -15,15 +12,15 @@ Untuk menginstal nginx jalankan perintah:
 # apt instal nginx
 ```
 
-Untuk memeriksa apakah instalasi nginx berhasil atau tidak, buka _browser_
-lalu akses <http://localhost>. Apabila akses berhasil maka nginx telah terpasang
-dan siap digunakan.
+Untuk memeriksa apakah instalasi nginx berhasil atau tidak, buka _browser_ lalu
+akses <http://localhost>. Apabila akses berhasil maka nginx telah terpasang dan
+siap digunakan.
 
 <!--more-->
 
-{{< figure src="images/nginx.png" link="images/nginx.png" >}}
+![Web browser show localhost with nginx default page](images/nginx.png)
 
-#### Nginx dan PHP
+### Nginx dan PHP
 
 Untuk dapat menggunakan php dengan nginx terlebih dahulu kita harus menginstall
 `php-fpm`
@@ -33,19 +30,25 @@ Untuk dapat menggunakan php dengan nginx terlebih dahulu kita harus menginstall
 ```
 
 Sunting file `/etc/php/{php-version}/fpm/php.ini`. Lalu ubah
+
 ```
 ;cgi.fix_pathinfo=1
 ```
+
 Menjadi
+
 ```
 cgi.fix_pathinfo=0
 ```
+
 Restart php-fpm
+
 ```
 # systemctl restart php{php-version}-fpm.service
 ```
 
-Ubah juga `/etc/nginx/sites-available/default`, hilangkan komentar (tanda #) pada:
+Ubah juga `/etc/nginx/sites-available/default`, hilangkan komentar (tanda #)
+pada:
 
 ```
 #location ~ \.php$ {
@@ -63,6 +66,7 @@ Ubah juga `/etc/nginx/sites-available/default`, hilangkan komentar (tanda #) pad
 ```
 
 Menjadi:
+
 ```
 location ~ \.php$ {
     include snippets/fastcgi-php.conf;
@@ -101,6 +105,6 @@ phpinfo();
 Berikutnya akses http://localhost/test.php, jika berhasil maka _browser_ akan
 menampilkan informasi seperti gambar berikut:
 
-{{< figure src="images/phpfpm.png" link="images/phpfpm.png" >}}
+![Web browser show localhost/test.php with phpinfo page](images/phpfpm.png)
 
 Sekian.

@@ -2,7 +2,8 @@ const GoTemplatePlugin = require('prettier-plugin-go-template')
 const OrganizeAttributePlugin = require('prettier-plugin-organize-attributes')
 
 module.exports = {
-    attributeSort: "ASC",
+    attributeSort: 'ASC',
+    proseWrap: 'always',
     quoteProps: 'consistent',
     semi: false,
     singleQuote: true,
