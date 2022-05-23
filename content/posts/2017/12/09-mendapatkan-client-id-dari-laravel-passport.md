@@ -6,10 +6,9 @@ tags:
 ---
 
 Ketika menyimpan data transaksional pada database terkadang kita perlu menyimpan
-juga data client yang digunakan _user_ untuk menyimpan data. [Laravel
-Passport][https://laravel.com/docs/5.5/passport] sayangnya tidak menyertakan
-atribute client id pada _Authenticated user_. Untuk mendapatkan client id dari
-_user_ dapat menggunakan cara berikut:
+juga data client yang digunakan _user_ untuk menyimpan data. Laravel
+Passport[^1] sayangnya tidak menyertakan atribute client id pada _Authenticated
+user_. Untuk mendapatkan client id dari _user_ dapat menggunakan cara berikut:
 
 ```php
 <?php
@@ -36,3 +35,5 @@ use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 ```
 
 <!--more-->
+
+[^1]: https://laravel.com/docs/5.5/passport
