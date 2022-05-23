@@ -3,7 +3,16 @@
 {{ end }}
 
 {{ define "main" }}
-    <article class="prose mt-12 leading-normal dark:prose-invert">
+    <article
+        class="
+            dark:hover:prose-a:text-indigo-400
+            dark:prose-invert
+            hover:prose-a:text-indigo-600
+            leading-normal
+            mt-12
+            prose
+        "
+    >
         <h1 class="m-0">{{ .Title }}</h1>
 
         <div class="content-body leading-relaxed">{{ .Content }}</div>

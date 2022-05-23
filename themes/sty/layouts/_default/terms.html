@@ -1,5 +1,14 @@
 {{ define "main" }}
-    <article class="my-12 leading-normal prose dark:prose-invert">
+    <article
+        class="
+            dark:hover:prose-a:text-indigo-400
+            dark:prose-invert
+            hover:prose-a:text-indigo-600
+            leading-normal
+            my-12
+            prose
+        "
+    >
         <h2>List of {{ .Title }}</h2>
         <ol class="leading-relaxed">
             {{ range .Data.Terms.Alphabetical }}

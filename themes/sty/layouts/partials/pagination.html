@@ -1,14 +1,19 @@
 <nav class="my-12 grid grid-cols-3 w-auto text-sm uppercase font-bold">
     {{ if .Paginator.HasPrev }}
         <div class="col-start-1 py-2">
-            <a class="hover:text-indigo-500" href="{{ .Paginator.Prev.URL }}">
+            <a
+                class="hover:text-indigo-600 dark:hover:text-indigo-400"
+                href="{{ .Paginator.Prev.URL }}"
+            >
                 Previous
             </a>
         </div>
     {{ end }}
 
     {{ if gt .Paginator.TotalPages 0 }}
-        <span class="col-start-2 text-gray-500 p-2 text-center font-semibold">
+        <span
+            class="col-start-2 text-gray-600 p-2 text-center font-semibold dark:text-gray-400"
+        >
             Page
             {{ .Paginator.PageNumber }}
             of
@@ -18,7 +23,10 @@
 
     {{ if .Paginator.HasNext }}
         <div class="col-start-3 py-2 text-right">
-            <a class="hover:text-indigo-500" href="{{ .Paginator.Next.URL }}">
+            <a
+                class="hover:text-indigo-600 dark:hover:text-indigo-400"
+                href="{{ .Paginator.Next.URL }}"
+            >
                 Next
             </a>
         </div>

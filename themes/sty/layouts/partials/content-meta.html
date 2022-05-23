@@ -1,5 +1,15 @@
 <div
-    class="not-prose mb-5 mt-2 text-xs font-semibold uppercase tracking-wide text-gray-500"
+    class="
+        dark:text-gray-400
+        font-semibold
+        mb-5
+        mt-2
+        not-prose
+        text-gray-600
+        text-xs
+        tracking-wide
+        uppercase
+    "
 >
     <span>
         <time datetime="{{ .Date }}">
@@ -13,7 +23,7 @@
             Tags:
             {{ range $index, $el := $tags }}
                 <a
-                    class="hover:text-indigo-500"
+                    class="hover:text-indigo-600 dark:hover:text-indigo-400"
                     href="{{ "/tags/" | relLangURL }}{{ . | urlize }}"
                 >
                     {{- . }}{{ if lt (add $index 1) (len $tags) }},{{ end -}}

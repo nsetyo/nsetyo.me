@@ -1,15 +1,21 @@
 <p>
     {{ if not (hasPrefix .Destination "http") }}
+        {{ $image := .Page.Resources.GetMatch .Destination }}
+        {{ $image := $image.Resize "544x webp q100" }}
         <img
+            class="border rounded-md"
             {{ with .Title }}title="{{ . }}"{{ end }}
             alt="{{ .Text }}"
-            src="{{ .Page.RelPermalink }}{{ .Destination | safeURL }}"
+            src="{{ $image.RelPermalink }}"
+            width="100%"
         />
     {{ else }}
         <img
+            class="border rounded-md"
             {{ with .Title }}title="{{ . }}"{{ end }}
             alt="{{ .Text }}"
             src="{{ .Destination | safeURL }}"
+            width="100%"
         />
     {{ end }}
 </p>

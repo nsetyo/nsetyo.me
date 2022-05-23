@@ -2,16 +2,16 @@
     class="fixed bg-white z-20 w-full border-b border-gray-200 transition dark:border-gray-800 dark:bg-gray-900"
 >
     <div
-        class="container z-30 mx-auto flex max-w-xl items-center text-gray-500 dark:text-gray-200"
+        class="container z-30 mx-auto flex max-w-xl items-center text-gray-600 dark:text-gray-200"
     >
         {{ $logo := resources.Get "imgs/logo.svg" | resources.Minify }}
-        <a class="py-2" href="/">
+        <a class="py-2" href="/" title="nsetyo.id logo">
             {{ $logo.Content | safeHTML }}
         </a>
         <nav class="flex flex-1 justify-end text-sm font-bold uppercase">
             {{ range .Site.Menus.navigation }}
                 <a
-                    class="ml-6 block hover:text-indigo-500"
+                    class="ml-6 block hover:text-indigo-600 dark:hover:text-indigo-400"
                     href="{{ .URL }}"
                     title="{{ .Title }}"
                 >
@@ -22,7 +22,7 @@
         <div class="ml-6 hidden" id="scheme-toggler">
             {{ $moon := resources.Get "imgs/moon.svg" | resources.Minify }}
             <button
-                class="hover:text-indigo-500 dark:hidden"
+                class="hover:text-indigo-600 dark:hover:text-indigo-400 dark:hidden"
                 onclick="switchToDarkColorScheme()"
                 title="Switch to dark-mode"
             >
@@ -31,7 +31,7 @@
 
             {{ $sun := resources.Get "imgs/sun.svg" | resources.Minify }}
             <button
-                class="hidden hover:text-indigo-500 dark:inline"
+                class="hidden hover:text-indigo-600 dark:hover:text-indigo-400 dark:inline"
                 onclick="switchToLightColorScheme()"
                 title="Switch to light-mode"
             >

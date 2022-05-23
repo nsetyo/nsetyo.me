@@ -3,6 +3,6 @@
 
 @layer components {
     article img {
-        @apply text-center text-gray-500;
+        @apply text-center text-gray-600;
     }
 }
