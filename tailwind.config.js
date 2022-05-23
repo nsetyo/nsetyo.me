@@ -5,8 +5,7 @@ module.exports = {
     darkMode: 'class',
     theme: {
         container: {
-            center: true,
-            padding: '2rem',
+            padding: '1rem',
         },
         extend: {
             typography: (theme) => ({

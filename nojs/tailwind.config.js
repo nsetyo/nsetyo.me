@@ -4,8 +4,7 @@ module.exports = {
     content: ['content/**/*.md', 'themes/**/*.{html,svg}'],
     theme: {
         container: {
-            center: true,
-            padding: '2rem',
+            padding: '1rem',
         },
         extend: {
             typography: (theme) => ({
