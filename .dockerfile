@@ -18,6 +18,7 @@ RUN apt update -y \
     curl \
     git \
     locales \
+    ncat \
     unzip
 
 RUN npm install -g npm

@@ -19,7 +19,8 @@ services:
                 - NODEJS_VERSION=16.15
                 - HUGO_VERSION=0.99.1
                 - HUGO_CHECKSUM=f930fcc5559337233d24de3704a09b877a6cd29449241b69e111e10b24f6e200
-        command: hugo server --bind 0.0.0.0 --liveReloadPort 443 --disableFastRender
+        command:
+            hugo server --bind 0.0.0.0 --liveReloadPort 443 --disableFastRender
         networks:
             - public
         expose:
@@ -30,8 +31,8 @@ services:
             - ./.git:/var/www/.git
             - ./.vscode-server/node:/root/.vscode-server
             - ./:/var/www/
-            - /home/nsetyo/.gnupg:/root/.gnupg
-            - /home/nsetyo/.ssh:/root/.ssh
+            - ${WORKSPACE_GPG_DIR:-/home/nsetyo/.gnupg}:/root/.gnupg
+            - ${WORKSPACE_SSH_DIR:-/home/nsetyo/.ssh}:/root/.ssh
         labels:
             caddy.reverse_proxy: '{{upstreams 1313}}'
             caddy: nsetyo.localhost
