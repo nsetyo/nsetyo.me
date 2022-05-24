@@ -2,12 +2,11 @@ version: '3'
 ### Service Network ############################################################
 services:
     node-setup:
-        command: bash -c 'pnpm install'
+        command: bash -c 'npm install'
         image: nsetyo-id
         volumes:
             - ./.bashrc:/root/.bashrc
-            - ./.cache/pnpm-store:/root/.pnpm-store
-            - ./.cache/pnpm:/root/.cache/pnpm
+            - ./.cache/npm:/root/.npm
             - ./:/var/www/
     www:
         image: nsetyo-id
@@ -27,8 +26,7 @@ services:
             - 1313
         volumes:
             - ./.bashrc:/root/.bashrc
-            - ./.cache/pnpm-store:/root/.pnpm-store
-            - ./.cache/pnpm:/root/.cache/pnpm
+            - ./.cache/npm:/root/.npm
             - ./.git:/var/www/.git
             - ./.vscode-server/node:/root/.vscode-server
             - ./:/var/www/

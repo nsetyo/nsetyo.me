@@ -20,10 +20,7 @@ RUN apt update -y \
     locales \
     unzip
 
-RUN corepack enable \
-    && npm install -g npm \
-    && pnpm add -g pnpm \
-    && pnpm config set store-dir /root/.pnpm-store
+RUN npm install -g npm
 
 RUN npm install -g postcss postcss-cli
 
