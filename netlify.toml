@@ -1,0 +1,13 @@
+[build]
+command = "hugo --minify"
+publish = "public"
+
+[build.environment]
+HUGO_VERSION = "0.99.1"
+
+[[plugins]]
+# Installs the Lighthouse Build Plugin for all deploy contexts
+package = "@netlify/plugin-lighthouse"
+
+[[plugins]]
+package = "netlify-plugin-checklinks"
