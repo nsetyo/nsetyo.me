@@ -1,6 +1,5 @@
 @import "tailwindcss/base";
 @import "hl";
-@import "fonts";
 
 .footnote-ref:before {
     content: "[";

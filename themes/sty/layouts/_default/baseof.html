@@ -31,6 +31,14 @@
 
         <link href="{{ $canonicalurl }}" rel="canonical" />
 
+        {{ $fonts := resources.Get "css/fonts.css"  | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
+        <link
+            as="style"
+            href="{{ $fonts.RelPermalink }}"
+            integrity="{{ $fonts.Data.Integrity }}"
+            rel="preload"
+        />
+
         {{ $base := resources.Get "css/base.css"  | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
         <link
             defer
@@ -43,10 +51,10 @@
         {{ $options := dict "config" "nojs/postcss.config.js" }}
         {{ $nojs  := resources.Get "css/nojs.css" | resources.PostCSS $options | resources.Minify | resources.Fingerprint "sha256" }}
         <link
-            defer
+            as="style"
             href="{{ $css.RelPermalink }}"
             integrity="{{ $css.Data.Integrity }}"
-            rel="stylesheet"
+            rel="preload"
         />
         <noscript>
             <link
