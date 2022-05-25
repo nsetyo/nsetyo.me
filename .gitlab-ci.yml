@@ -23,7 +23,7 @@ before_script:
 build:
     stage: build
     script:
-        - pnpm install
+        - npm install
         - hugo --minify -d public
     artifacts:
         paths:
