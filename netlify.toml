@@ -11,3 +11,5 @@ package = "@netlify/plugin-lighthouse"
 
 [[plugins]]
 package = "netlify-plugin-checklinks"
+[plugins.inputs]
+skipPatterns = ['#fn:']
