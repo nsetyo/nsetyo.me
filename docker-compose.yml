@@ -8,19 +8,24 @@ services:
             - ./.bashrc:/root/.bashrc
             - ./.cache/npm:/root/.npm
             - ./:/var/www/
+        healthcheck:
+            test: bash -c '[ -f node_modules/.bin/postcss ]'
+            interval: 1s
+            timeout: 60s
     www:
         image: nsetyo-id
         depends_on:
-            - node-setup
+            node-setup:
+                condition: service_healthy
         build:
             dockerfile: ./.dockerfile
             context: .
             args:
                 - NODEJS_VERSION=16.15
-                - HUGO_VERSION=0.99.1
                 - HUGO_CHECKSUM=f930fcc5559337233d24de3704a09b877a6cd29449241b69e111e10b24f6e200
+                - HUGO_VERSION=0.99.1
         command:
-            hugo server --bind 0.0.0.0 --liveReloadPort 443 --disableFastRender
+            ${HUGO_COMMAND:-hugo server --bind 0.0.0.0 --liveReloadPort 443}
         networks:
             - public
         expose:
@@ -38,5 +43,5 @@ services:
             caddy: nsetyo.localhost
 networks:
     public:
-        external:
-            name: caddy
+        external: true
+        name: caddy

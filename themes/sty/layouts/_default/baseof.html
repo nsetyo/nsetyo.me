@@ -36,15 +36,14 @@
             as="style"
             href="{{ $fonts.RelPermalink }}"
             integrity="{{ $fonts.Data.Integrity }}"
-            rel="preload"
+            rel="preload stylesheet"
         />
 
         {{ $base := resources.Get "css/base.css"  | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
         <link
-            defer
             href="{{ $base.RelPermalink }}"
             integrity="{{ $base.Data.Integrity }}"
-            rel="stylesheet"
+            rel="preload stylesheet"
         />
 
         {{ $css  := resources.Get "css/style.css" | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
@@ -54,13 +53,14 @@
             as="style"
             href="{{ $css.RelPermalink }}"
             integrity="{{ $css.Data.Integrity }}"
-            rel="preload"
+            rel="preload stylesheet"
         />
         <noscript>
             <link
+                as="style"
                 href="{{ $nojs.RelPermalink }}"
                 integrity="{{ $nojs.Data.Integrity }}"
-                rel="stylesheet"
+                rel="preload stylesheet"
             />
         </noscript>
 
