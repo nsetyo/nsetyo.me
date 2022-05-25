@@ -41,6 +41,7 @@
 
         {{ $base := resources.Get "css/base.css"  | resources.PostCSS | resources.Minify | resources.Fingerprint "sha256" }}
         <link
+            as="style"
             href="{{ $base.RelPermalink }}"
             integrity="{{ $base.Data.Integrity }}"
             rel="preload stylesheet"
