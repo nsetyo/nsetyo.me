@@ -1,7 +1,7 @@
 image: node:16.15
 
 variables:
-    HUGO_VERSION: '0.99.1'
+    HUGO_VERSION: '0.115.4'
     HUGO_CHECKSUM: 'f930fcc5559337233d24de3704a09b877a6cd29449241b69e111e10b24f6e200'
     HUGO_ENV: 'production'
 

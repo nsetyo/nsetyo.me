@@ -9,9 +9,13 @@
     },
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
+    },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.quickSuggestions": true
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
     }
 }
