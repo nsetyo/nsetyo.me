@@ -10,9 +10,7 @@ the advent of onion domains has emerged as a groundbreaking solution. Onion
 domains, also known as Tor hidden services, offer a unique and anonymous way to
 access websites while shielding the identities of both the website operators and
 users. In this blog post, I will delve into the fascinating world of onion
-domains, uncovering how to host an onion web server. This blog post will not
-cover the mechanics, advantages, or ethical implications of using the Tor
-network.
+domains, uncovering how to host an onion web server.
 
 #### Connecting to the Tor Network
 
