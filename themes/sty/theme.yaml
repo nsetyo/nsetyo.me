@@ -1,16 +1,16 @@
 ---
 name: Esteye
 description: Esteye hugo theme
-homepage: http://nsetyo.id
+homepage: http://nsetyo.me
 license: MIT
 licenselink: https://github.com/nsetyo/esteye-hugo-theme/blob/master/LICENSE
 tags:
-  - blog
-  - simple
+    - blog
+    - simple
 features:
-  -
+    -
 min_version: 0.1
 
 author:
-  name: Setyo
-  homepage: https://nsetyo.id
+    name: Setyo
+    homepage: https://nsetyo.me

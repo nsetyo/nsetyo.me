@@ -26,7 +26,7 @@ menus:
           url: /posts/
           weight: 1
         - name: About
-          url: https://youtube.com/watch?v=dQw4w9WgXcQ
+          url: /about/
           weight: 2
 minify:
     minifyOutput: true
