@@ -1,0 +1,5 @@
+[tools]
+  dprint        = "0.49.1"
+  hugo-extended = "0.146"
+  node          = "23.11.0"
+  taplo         = "0.9.3"

@@ -1,13 +1,16 @@
 ---
-hideContentTitle: true
-title: About
+title: Software developer, lifelong learner, and code breaker.
+params:
+  github: https://github.com/nsetyo
+  instagram: https://www.instagram.com/nsetyo
+  linkedin: https://www.linkedin.com/in/nsetyo/
+  twitter: https://x.com/nsetyo
 ---
 
-### Hi there, my name is Setyo 👋
+Hi, I'm Setyo. I've been creating and breaking code since 2010. For now, I
+mostly focus on software development, especially full-stack web development.
 
-I'm a passionate fullstack developer with 10 years programming experience. I
-have solid background and advanced knowledge in web development including
-HTML/CSS, PHP, and Javascript/Typescript. Currently I'm working with Laravel and
-Vue.js as main framework. I'm, also capable in working with database management
-tools (MySQL and PostgreSQL), managing GNU/Linux server, and using DevOps tools
-like Docker.
+<!--more-->
+
+During my journey in software development, I've been learning and using many
+programming languages such as C, Java, PHP, Rust, and Javascript/Typescript.

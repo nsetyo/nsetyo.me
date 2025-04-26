@@ -1,0 +1,10 @@
+{{- with resources.Get "imgs/logo.png" -}}
+  {{- with .Resize "24x" | fingerprint -}}
+    <link
+      href="{{ .RelPermalink }}"
+      rel="icon"
+      sizes="24x24"
+      type="image/png"
+    />
+  {{- end -}}
+{{- end -}}

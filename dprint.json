@@ -1,0 +1,44 @@
+{
+  "indentWidth": 2,
+  "lineWidth": 80,
+  "typescript": {
+  },
+  "exec": {
+    "cwd": "${configDir}",
+    "commands": [
+      {
+        "command": "taplo fmt -",
+        "exts": ["toml"]
+      },
+      {
+        "command": "node_modules/.bin/prettier --stdin-filepath {{file_path}} --tab-width {{indent_width}} --print-width {{line_width}}",
+        "exts": ["html", "svg"]
+      }
+    ]
+  },
+  "json": {
+  },
+  "markdown": {
+    "lineWidth": 80,
+    "textWrap": "always"
+  },
+  "markup": {
+  },
+  "malva": {
+  },
+  "yaml": {
+  },
+  "excludes": [
+    "**/node_modules",
+    "**/*-lock.json"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.94.0.wasm",
+    "https://plugins.dprint.dev/json-0.20.0.wasm",
+    "https://plugins.dprint.dev/markdown-0.18.0.wasm",
+    "https://plugins.dprint.dev/g-plane/malva-v0.11.2.wasm",
+    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.0.wasm",
+    "https://plugins.dprint.dev/exec-0.5.1.json@492414e39dea4dccc07b4af796d2f4efdb89e84bae2bd4e1e924c0cc050855bf",
+    "https://plugins.dprint.dev/g-plane/markup_fmt-v0.19.1.wasm"
+  ]
+}

@@ -1,0 +1,61 @@
+<div class="space-y-10 lg:pl-16 xl:pl-24">
+  <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      {{ partial "svgs/svg-briefcase.html" (dict "class" "h-6 w-6 flex-none") }}
+      <span class="ml-3">Work</span>
+    </h2>
+    <ol class="mt-6 space-y-4">
+      {{ range .Site.Data.works }}
+        {{ $work := . }}
+        {{ $image := (printf "imgs/logo-%s.png" $work.key) }}
+
+        {{- with resources.Get $image -}}
+          {{- with .Resize "64x" | fingerprint -}}
+            <li class="flex gap-4">
+              <div
+                class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0"
+              >
+                <img
+                  alt="Logo {{ upper $work.key }}"
+                  width="32"
+                  height="32"
+                  class="h-7 w-7"
+                  style="color: transparent;"
+                  src="{{ .RelPermalink }}"
+                />
+              </div>
+              <dl class="flex flex-auto flex-wrap gap-x-2">
+                <dt class="sr-only">Company</dt>
+                <dd
+                  class="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100"
+                >
+                  {{ $work.company }}
+                </dd>
+                <dt class="sr-only">Role</dt>
+                <dd class="text-xs text-zinc-500 dark:text-zinc-400">
+                  {{ $work.role }}
+                </dd>
+                <dt class="sr-only">Date</dt>
+                <dd
+                  class="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  aria-label="{{ $work.since }} until Present"
+                >
+                  {{ $until := cond (eq $work.until "present") (now).Year $work.until }}
+                  <time datetime="{{ $work.since }}">{{ $work.since }}</time>
+                  <span aria-hidden="true">—</span>
+                  <time datetime="{{ $until }}">{{ $work.until }}</time>
+                </dd>
+              </dl>
+            </li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ol>
+    <a
+      class="inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70 group mt-6 w-full"
+      href="#"
+      >Download CV
+      {{ partial "svgs/svg-arrow-down.html" (dict "class" "h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50") }}</a
+    >
+  </div>
+</div>

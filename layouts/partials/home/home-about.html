@@ -1,0 +1,61 @@
+<div class="sm:px-8 mt-9">
+  <div class="mx-auto w-full max-w-7xl lg:px-8">
+    <div class="relative px-4 sm:px-8 lg:px-12">
+      <div class="mx-auto max-w-2xl lg:max-w-5xl">
+        <div class="max-w-2xl">
+          <h1
+            class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100"
+          >
+            {{ .Title }}
+          </h1>
+          <div class="mt-6 text-base *:text-zinc-600 *:dark:text-zinc-400">
+            {{ .Summary }}
+          </div>
+          <div class="mt-6 flex gap-6">
+            {{ $class := "h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" }}
+            {{ with .Params.twitter }}
+              <a
+                class="group -m-1 p-1"
+                aria-label="Follow on X"
+                href="{{ . }}"
+                target="_blank"
+              >
+                {{ partial "svgs/svg-twitter.html" (dict "class" $class) }}
+              </a>
+            {{ end }}
+            {{ with .Params.instagram }}
+              <a
+                class="group -m-1 p-1"
+                aria-label="Follow on Instagram"
+                href="{{ . }}"
+                target="_blank"
+              >
+                {{ partial "svgs/svg-instagram.html" (dict "class" $class) }}
+              </a>
+            {{ end }}
+            {{ with .Params.github }}
+              <a
+                class="group -m-1 p-1"
+                aria-label="Follow on GitHub"
+                href="{{ . }}"
+                target="_blank"
+              >
+                {{ partial "svgs/svg-github.html" (dict "class" $class) }}
+              </a>
+            {{ end }}
+            {{ with .Params.linkedin }}
+              <a
+                class="group -m-1 p-1"
+                aria-label="Follow on LinkedIn"
+                href="{{ . }}"
+                target="_blank"
+              >
+                {{ partial "svgs/svg-linkedin.html" (dict "class" $class) }}
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
