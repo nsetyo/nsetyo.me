@@ -13,9 +13,9 @@
           scale(1.7777777777777777);
         --avatar-image-transform: translate3d(0rem, 0, 0) scale(1);
         --avatar-top: 0px;
-        --content-offset: 116px;
-        --header-height: 180px;
-        --header-mb: -116px;
+        --content-offset: 0px;
+        --header-height: 64px;
+        --header-mb: 0px;
         --header-position: sticky;
         --header-top: 0px;
       }
@@ -25,7 +25,7 @@
     {{ partialCached "site/site-favicon.html" . }}
     {{ partialCached "site/site-title.html" . }}
   </head>
-  <body class="flex h-full bg-zinc-50 dark:bg-black">
+  <body data-kind="{{ .Kind }}" class="flex h-full bg-zinc-50 dark:bg-black">
     <div class="flex w-full">
       <div class="fixed inset-0 flex justify-center sm:px-8">
         <div class="flex w-full max-w-7xl lg:px-8">
@@ -45,5 +45,6 @@
         {{ partialCached "site/site-footer.html" . }}
       </div>
     </div>
+    {{ partialCached "site/site-javascript.html" . }}
   </body>
 </html>

@@ -1,4 +1,5 @@
 [tools]
+biome = "latest"
   dprint        = "0.49.1"
   hugo-extended = "0.146"
   node          = "23.11.0"
