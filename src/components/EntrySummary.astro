@@ -1,0 +1,6 @@
+---
+import { getSummary } from '@/utilities'
+
+const html = await Astro.slots.render('default')
+---
+<Fragment set:html={getSummary(html)} />

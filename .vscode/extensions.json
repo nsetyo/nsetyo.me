@@ -1,7 +1,4 @@
 {
-  "recommendations": [
-    "tamasfe.even-better-toml",
-    "esbenp.prettier-vscode",
-    "dprint.dprint"
-  ]
+  "recommendations": ["astro-build.astro-vscode", "unifiedjs.vscode-mdx"],
+  "unwantedRecommendations": []
 }

@@ -1,0 +1,137 @@
+---
+import { render } from 'astro:content'
+import { getEntry } from 'astro:content'
+
+import { Image } from 'astro:assets'
+import { Container } from '@/components/Container'
+import * as Icons from '@/components/Icons'
+import * as MainMd from '@/content/index.md'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const main = await getEntry('pages', MainMd.frontmatter.slug ?? 'index')
+
+if (!main) throw new Error("Couldn't find main page")
+
+const { title, description, author } = main.data
+
+const { Content } = await render(main)
+---
+
+<BaseLayout title={title}>
+	<Container className="mt-16 sm:mt-32">
+		<div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+			{
+				author?.picture && (
+					<div class="lg:pl-20">
+						<div class="max-w-xs px-2.5 lg:max-w-none">
+							<Image
+								alt="Setyo's Picture"
+								class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+								src={author.picture}
+								sizes="(min-width: 1024px) 32rem, 20rem"
+								width={480}
+							/>
+						</div>
+					</div>
+				)
+			}
+			<div class="lg:order-first lg:row-span-2">
+				<h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+					{description?.split('.').at(0)}.
+				</h1>
+				<div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+					<Content />
+				</div>
+			</div>
+			<div class="lg:pl-20">
+				<ul role="list">
+					{
+						author?.contacts?.github && (
+							<li>
+								<a
+									class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+									href={author.contacts.github}
+								>
+									<Icons.GitHubIcon
+										className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									/>
+									<span class="ml-4">
+										Follow on GitHub
+									</span>
+								</a>
+							</li>
+						)
+					}
+					{
+						author?.contacts?.twitter && (
+							<li class="mt-4">
+								<a
+									class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+									href={author.contacts.twitter}
+								>
+									<Icons.XIcon
+										className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									/>
+									<span class="ml-4">
+										Follow on X
+									</span>
+								</a>
+							</li>
+						)
+					}
+					{
+						author?.contacts?.instagram && (
+							<li class="mt-4">
+								<a
+									class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+									href={author.contacts.instagram}
+								>
+									<Icons.InstagramIcon
+										className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									/>
+									<span class="ml-4">
+										Follow on Instagram
+									</span>
+								</a>
+							</li>
+						)
+					}
+					{
+						author?.contacts?.linkedin && (
+							<li class="mt-4">
+								<a
+									class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+									href={author.contacts.linkedin}
+								>
+									<Icons.LinkedInIcon
+										className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									/>
+									<span class="ml-4">
+										Follow on LinkedIn
+									</span>
+								</a>
+							</li>
+						)
+					}
+					{
+						author?.contacts?.email && (
+							<li class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
+								<a
+									class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+									href={`mailto:${author.contacts.email}`}
+								>
+									<Icons.MailIcon
+										className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									/>
+									<span class="ml-4">
+										{author.contacts.email}
+									</span>
+								</a>
+							</li>
+						)
+					}
+				</ul>
+			</div>
+		</div>
+	</Container>
+</BaseLayout>

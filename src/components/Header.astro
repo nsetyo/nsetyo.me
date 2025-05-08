@@ -1,0 +1,257 @@
+---
+import type { CSSProperties } from 'react'
+
+import { getImage } from 'astro:assets'
+import { getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import { Container } from '@/components/Container'
+import { Avatar, AvatarContainer, DesktopNav, MobileNav, ThemeToggle } from '@/components/Header'
+import * as MainMd from '@/content/index.md'
+import { toTitleCase } from '@/utilities'
+
+const main = await getEntry('pages', MainMd.frontmatter.slug ?? 'index')
+
+if (!main) throw new Error("Couldn't find main page")
+
+const { author } = main.data
+
+const avatar = author?.avatar
+	? await getImage({ src: author?.avatar, format: 'jpeg', width: 128 })
+	: null
+
+const currentPath = Astro.url.pathname
+const isHome = currentPath === '/'
+
+const pages = await getCollection('pages')
+
+const menu = pages
+	.filter((p) => p.data.menu)
+	.map((p) => {
+		const menu = p.data.menu ?? 0
+
+		const data = { ...p.data, menu }
+
+		return { ...p, data }
+	})
+	.toSorted((a, b) => (b.data.menu > a.data.menu ? -1 : 1))
+	.map((p) => {
+		return { title: toTitleCase(p.id), href: `/${p.id}` }
+	})
+---
+
+<header
+	class="pointer-events-none relative z-50 flex flex-none flex-col"
+	style={{
+		height: 'var(--header-height)',
+		marginBottom: 'var(--header-mb)',
+	}}
+>
+	{
+		isHome && (
+			<div
+				class="order-last mt-[calc(--spacing(16)-(--spacing(3)))]"
+				id="avatarRef"
+			/>
+		)
+	}
+
+	{
+		avatar && isHome && (
+			<Container
+				className="top-0 order-last -mb-3 pt-3"
+				style={{
+					position: 'var(--header-position)' as CSSProperties['position'],
+				}}
+			>
+				<div
+					class="top-(--avatar-top,--spacing(3)) w-full"
+					style={{
+						position: 'var(--header-inner-position)',
+					}}
+				>
+					<div class="relative">
+						<AvatarContainer
+							className="absolute top-3 left-0 origin-left transition-opacity"
+							style={{
+								opacity: 'var(--avatar-border-opacity, 0)',
+								transform: 'var(--avatar-border-transform)',
+							}}
+						/>
+						<Avatar
+							alt="Author's avatar"
+							className="block h-16 w-16 origin-left"
+							large
+							src={avatar.src}
+							style={{
+								transform: 'var(--avatar-image-transform)',
+							}}
+						/>
+					</div>
+				</div>
+			</Container>
+		)
+	}
+
+	<div
+		class="top-0 z-10 h-16 pt-6"
+		id="headerRef"
+		style={{ position: 'var(--header-position)' }}
+	>
+		<Container
+			className="top-(--header-top,--spacing(6)) w-full"
+			style={{
+				position: 'var(--header-inner-position)' as CSSProperties['position'],
+			}}
+		>
+			<div class="relative flex gap-4">
+				<div class="flex flex-1">
+					{
+						avatar && !isHome && (
+							<AvatarContainer>
+								<Avatar
+									alt="Author's avatar"
+									src={avatar.src}
+								/>
+							</AvatarContainer>
+						)
+					}
+				</div>
+				<div class="flex flex-1 justify-end md:justify-center">
+					<MobileNav
+						className="pointer-events-auto md:hidden"
+						menu={menu}
+					/>
+					<DesktopNav
+						className="pointer-events-auto hidden md:block"
+						active={currentPath}
+						menu={menu}
+					/>
+				</div>
+				<div class="flex justify-end md:flex-1">
+					<div class="pointer-events-auto">
+						<ThemeToggle />
+					</div>
+				</div>
+			</div>
+		</Container>
+	</div>
+</header>
+{
+	isHome && (
+		<div
+			class="flex-none"
+			style={{ height: 'var(--content-offset)' }}
+		/>
+	)
+}
+
+<script>
+function clamp(number: number, a: number, b: number) {
+	const min = Math.min(a, b)
+	const max = Math.max(a, b)
+
+	return Math.min(Math.max(number, min), max)
+}
+
+function setProperty(property: string, value: string) {
+	document.documentElement.style.setProperty(property, value)
+}
+
+function removeProperty(property: string) {
+	document.documentElement.style.removeProperty(property)
+}
+
+const isHome = window.location.pathname === '/'
+const avatarRef = document.getElementById('avatarRef')
+const headerRef = document.getElementById('headerRef')
+const downDelay = avatarRef?.offsetTop ?? 0
+const upDelay = 64
+
+let isInitial = true
+
+function updateHeaderStyles() {
+	if (!headerRef) {
+		return
+	}
+
+	let { top, height } = headerRef.getBoundingClientRect()
+	let scrollY = clamp(
+		window.scrollY,
+		0,
+		document.body.scrollHeight - window.innerHeight,
+	)
+
+	if (isInitial) {
+		setProperty('--header-position', 'sticky')
+	}
+
+	setProperty('--content-offset', `${downDelay}px`)
+
+	if (isInitial || scrollY < downDelay) {
+		setProperty('--header-height', `${downDelay + height}px`)
+		setProperty('--header-mb', `${-downDelay}px`)
+	} else if (top + height < -upDelay) {
+		let offset = Math.max(height, scrollY - upDelay)
+		setProperty('--header-height', `${offset}px`)
+		setProperty('--header-mb', `${height - offset}px`)
+	} else if (top === 0) {
+		setProperty('--header-height', `${scrollY + height}px`)
+		setProperty('--header-mb', `${-scrollY}px`)
+	}
+
+	if (top === 0 && scrollY > 0 && scrollY >= downDelay) {
+		setProperty('--header-inner-position', 'fixed')
+		removeProperty('--header-top')
+		removeProperty('--avatar-top')
+	} else {
+		removeProperty('--header-inner-position')
+		setProperty('--header-top', '0px')
+		setProperty('--avatar-top', '0px')
+	}
+}
+
+function updateAvatarStyles() {
+	if (!isHome) {
+		return
+	}
+
+	const fromScale = 1
+	const toScale = 36 / 64
+	const fromX = 0
+	const toX = 2 / 16
+
+	const scrollY = downDelay - window.scrollY
+
+	const scale = clamp(
+		(scrollY * (fromScale - toScale)) / downDelay + toScale,
+		fromScale,
+		toScale,
+	)
+
+	const x = clamp((scrollY * (fromX - toX)) / downDelay + toX, fromX, toX)
+
+	setProperty(
+		'--avatar-image-transform',
+		`translate3d(${x}rem, 0, 0) scale(${scale})`,
+	)
+
+	const borderScale = 1 / (toScale / scale)
+	const borderX = (-toX + x) * borderScale
+	const borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
+
+	setProperty('--avatar-border-transform', borderTransform)
+	setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')
+}
+
+function updateStyles() {
+	updateHeaderStyles()
+	updateAvatarStyles()
+
+	isInitial = false
+}
+
+updateStyles()
+
+window.addEventListener('scroll', updateStyles, { passive: true })
+window.addEventListener('resize', updateStyles)
+</script>

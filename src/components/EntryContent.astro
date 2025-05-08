@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+import { render } from 'astro:content'
+
+type Props = {
+	entry: CollectionEntry<'pages'> | CollectionEntry<'posts'>
+}
+
+const { entry } = Astro.props
+
+const { Content } = await render(entry)
+---
+
+<Content />

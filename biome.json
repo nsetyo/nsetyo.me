@@ -1,8 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "vcs": {
-    "clientKind": "git",
     "enabled": false,
+    "clientKind": "git",
     "useIgnoreFile": false
   },
   "files": {
@@ -10,7 +10,9 @@
     "ignore": []
   },
   "formatter": {
-    "enabled": true
+    "enabled": true,
+    "indentStyle": "tab",
+    "lineWidth": 100
   },
   "organizeImports": {
     "enabled": true
@@ -26,8 +28,10 @@
   },
   "javascript": {
     "formatter": {
+      "attributePosition": "multiline",
+      "indentStyle": "tab",
       "quoteStyle": "single",
-      "quoteProperties": "asNeeded",
+      "quoteProperties": "preserve",
       "semicolons": "asNeeded"
     }
   }

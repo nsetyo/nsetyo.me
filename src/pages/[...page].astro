@@ -1,0 +1,90 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+import type { CollectionKey } from 'astro:content'
+import { collections } from '@/content.config'
+import ListLayout from '@/layouts/ListLayout.astro'
+import PostLayout from '@/layouts/PostLayout.astro'
+import type { GetStaticPathsOptions, Page } from 'astro'
+
+type EntryType = CollectionEntry<'posts'> | CollectionEntry<'pages'>
+
+type Props = { page: EntryType; pagination?: Page<string> }
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+	const sections = ['posts']
+
+	const contents = Object.keys(collections) as CollectionKey[]
+
+	const pages = (await Promise.all(contents.map((c) => getCollection(c)))).flat()
+
+	const paged = sections.flatMap((section) => {
+		const data = paginate(
+			pages
+				.filter((p) => p.collection === section)
+				.toSorted((a, b) => {
+					if (a.data.date && !b.data.date) return -1
+
+					if (!a.data.date && b.data.date) return 1
+
+					if (!a.data.date || !b.data.date) return 0
+
+					return a.data.date > b.data.date ? -1 : 1
+				})
+				.map((p) => p.id),
+			{ pageSize: 5 },
+		)
+
+		const entry = pages.find((p) => p.id === section)
+
+		return entry ? data.map((item) => ({ ...item, entry })) : []
+	})
+
+	return [
+		...pages
+			.filter((page) => !sections.includes(page.id))
+			.map((entry) => {
+				const { collection, id } = entry
+
+				const slug = collection === 'pages' ? `${id}` : `${collection}/${id}`
+
+				return {
+					params: {
+						page: slug,
+					},
+					props: {
+						page: entry,
+					},
+				}
+			}),
+		...paged.map((page) => {
+			const { entry, params, props } = page
+
+			const slug = params.page ? `${entry.id}/${params.page}` : entry.id
+
+			return {
+				params: {
+					page: slug,
+				},
+				props: {
+					page: entry,
+					pagination: props.page,
+				},
+			}
+		}),
+	]
+}
+
+const { page, pagination } = Astro.props
+---
+
+{
+	page.collection === 'pages'
+		? (
+		<ListLayout
+			entry={page}
+			pagination={pagination}
+		/>
+	)
+		: <PostLayout {...page} />
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Software developer, lifelong learner, and code breaker.",
+"description": "Hi, I'm Setyo, a software developer based in Indonesia. I've been creating and breaking code since 2010. For now, I mostly focus in full-stack web development.",
+"author":
+    name: Setyo Nugroho
+    contacts:
+        email: setyo@pm.me
+        github: https://github.com/nsetyo
+        instagram: https://www.instagram.com/nsetyo
+        linkedin: https://www.linkedin.com/in/nsetyo
+        twitter: https://x.com/nsetyo
+    works:
+        -
+            company: Pusat Pelaporan dan Analisis Transaksi Keuangan
+            logo: ppatk
+            title: Software Engineer
+            since: 2016-10-01
+        -
+            company: Lembaga Sandi Negara (now Badan Siber dan Sandi Negara
+            logo: bssn
+            title: Administration Staff
+            since: 2014-12-01
+            until: 2016-09-01
+  "menus": [
+    {
+      "name": "About",
+      "href": "/about"
+    },
+    {
+      "name": "Posts",
+      "href": "/posts"
+    },
+    {
+      "name": "Projects",
+      "href": "/projects"
+    },
+    {
+      "name": "Uses",
+      "href": "/uses"
+    }
+  ]
+}

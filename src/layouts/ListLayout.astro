@@ -1,0 +1,121 @@
+---
+import type { CollectionEntry, CollectionKey } from 'astro:content'
+import type { Page } from 'astro'
+
+import { getEntries } from 'astro:content'
+import Button from '@/components/Button.astro'
+import { Card } from '@/components/Card'
+import EntryContent from '@/components/EntryContent.astro'
+import EntrySummary from '@/components/EntrySummary.astro'
+import SimpleLayout from '@/layouts/SimpleLayout.astro'
+import { dateFormat } from '@/utilities'
+
+type Props = {
+	entry: CollectionEntry<'pages'>
+	pagination?: Page<string>
+}
+
+const { entry, pagination } = Astro.props
+
+const { title, description } = entry.data
+
+const data = pagination?.data ?? []
+
+const entries = await getEntries(
+	data.map((item) => ({
+		collection: entry.id as CollectionKey,
+		id: item,
+	})),
+)
+
+const { next, prev } = pagination?.url ?? {}
+---
+
+<SimpleLayout
+	description={description}
+	title={title}
+>
+	{
+		prev && (
+			<div class="md:pl-6 mb-12">
+				<div class="flex max-w-3xl flex-col space-y-16">
+					<div class="md:grid md:grid-cols-4 md:items-baseline">
+						<div class="md:col-span-3 md:-col-end-1 group relative flex flex-col items-start">
+							<Button
+								className="group w-full"
+								href={`/${entry.id}${prev}`}
+								variant="secondary"
+							>
+								View previous posts
+							</Button>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+	<div class="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+		<div class="flex max-w-3xl flex-col space-y-16">
+			{
+				entries.map(e => (
+					<article class="md:grid md:grid-cols-4 md:items-baseline">
+						<Card className="md:col-span-3">
+							<Card.Title href={`/${entry.collection}/${e.id}`}>
+								{e.data.title}
+							</Card.Title>
+							{
+								e.data.date && (
+									<Card.Eyebrow
+										as="time"
+										className="md:hidden"
+										dateTime={e.data.date.toISOString()}
+										decorate
+									>
+										{dateFormat(e.data.date)}
+									</Card.Eyebrow>
+								)
+							}
+
+							<Card.Description className="w-full prose">
+								<EntrySummary>
+									<EntryContent entry={e} />
+								</EntrySummary>
+							</Card.Description>
+							<Card.Cta>Read article</Card.Cta>
+						</Card>
+						{
+							e.data.date && (
+								<Card.Eyebrow
+									as="time"
+									className="mt-1 max-md:hidden"
+									dateTime={e.data.date.toISOString()}
+								>
+									{dateFormat(e.data.date)}
+								</Card.Eyebrow>
+							)
+						}
+					</article>
+				))
+			}
+		</div>
+	</div>
+	{
+		next && (
+			<div class="md:pl-6 mt-12">
+				<div class="flex max-w-3xl flex-col space-y-16">
+					<div class="md:grid md:grid-cols-4 md:items-baseline">
+						<div class="md:col-span-3 md:-col-end-1 group relative flex flex-col items-start">
+							<Button
+								className="group w-full"
+								href={`/${entry.id}${next}`}
+								variant="secondary"
+							>
+								View next posts
+							</Button>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+</SimpleLayout>

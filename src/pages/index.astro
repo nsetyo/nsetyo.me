@@ -1,0 +1,235 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection, getEntry } from 'astro:content'
+import Button from '@/components/Button.astro'
+import { Card } from '@/components/Card'
+import { Container } from '@/components/Container'
+import * as Icons from '@/components/Icons'
+import * as MainMd from '@/content/index.md'
+import { clss, dateFormat } from '@/utilities'
+
+import EntryContent from '@/components/EntryContent.astro'
+import EntrySummary from '@/components/EntrySummary.astro'
+import WorkRole from '@/components/WorkRole.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+import photo1 from '@/assets/photos/01.jpg'
+import photo2 from '@/assets/photos/02.jpg'
+import photo3 from '@/assets/photos/03.jpg'
+import photo4 from '@/assets/photos/04.jpg'
+import photo5 from '@/assets/photos/05.jpg'
+
+const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+
+const posts = (await getCollection('posts'))
+	.toSorted((a, b) => {
+		if (a.data.date && !b.data.date) return -1
+
+		if (!a.data.date && b.data.date) return 1
+
+		if (!a.data.date || !b.data.date) return 0
+
+		return a.data.date > b.data.date ? -1 : 1
+	})
+	.slice(0, 5)
+
+const main = await getEntry('pages', MainMd.frontmatter.slug ?? 'index')
+
+if (!main) throw new Error("Couldn't find main page")
+
+const { title, description, author } = main.data
+---
+
+<BaseLayout title={title}>
+	<Container className="mt-9">
+		<div class="max-w-2xl">
+			<h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+				{title}
+			</h1>
+			<div class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+				{description}
+			</div>
+			<div class="mt-6 flex gap-6">
+				{
+					author?.contacts?.twitter && (
+						<a
+							aria-label="Follow on X"
+							class="group -m-1 p-1"
+							href={author.contacts.twitter}
+						>
+							<Icons.XIcon
+								className={clss(
+									'h-6',
+									'w-6',
+									'fill-zinc-500',
+									'transition',
+									'group-hover:fill-zinc-600',
+									'dark:fill-zinc-400',
+									'dark:group-hover:fill-zinc-300',
+								)}
+							/>
+						</a>
+					)
+				}
+				{
+					author?.contacts?.instagram && (
+						<a
+							aria-label="Follow on Instagram"
+							class="group -m-1 p-1"
+							href={author.contacts.instagram}
+						>
+							<Icons.InstagramIcon
+								className={clss(
+									'h-6',
+									'w-6',
+									'fill-zinc-500',
+									'transition',
+									'group-hover:fill-zinc-600',
+									'dark:fill-zinc-400',
+									'dark:group-hover:fill-zinc-300',
+								)}
+							/>
+						</a>
+					)
+				}
+				{
+					author?.contacts?.github && (
+						<a
+							aria-label="Follow on GitHub"
+							class="group -m-1 p-1"
+							href={author.contacts.github}
+						>
+							<Icons.GitHubIcon
+								className={clss(
+									'h-6',
+									'w-6',
+									'fill-zinc-500',
+									'transition',
+									'group-hover:fill-zinc-600',
+									'dark:fill-zinc-400',
+									'dark:group-hover:fill-zinc-300',
+								)}
+							/>
+						</a>
+					)
+				}
+				{
+					author?.contacts?.linkedin && (
+						<a
+							aria-label="Follow on LinkedIn"
+							class="group -m-1 p-1"
+							href={author.contacts.linkedin}
+						>
+							<Icons.LinkedInIcon
+								className={clss(
+									'h-6',
+									'w-6',
+									'fill-zinc-500',
+									'transition',
+									'group-hover:fill-zinc-600',
+									'dark:fill-zinc-400',
+									'dark:group-hover:fill-zinc-300',
+								)}
+							/>
+						</a>
+					)
+				}
+			</div>
+		</div>
+	</Container>
+	<div class="mt-16 sm:mt-20">
+		<div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+			{
+				[photo1, photo2, photo3, photo4, photo5].map((image, idx) => (
+					<div
+						class={clss(
+							'relative',
+							'aspect-9/10',
+							'w-44',
+							'flex-none',
+							'overflow-hidden',
+							'rounded-xl',
+							'bg-zinc-100',
+							'sm:w-72',
+							'sm:rounded-2xl',
+							'dark:bg-zinc-800',
+							rotations[idx % rotations.length],
+						)}
+					>
+						<Image
+							src={image}
+							alt=""
+							sizes="(min-width: 640px) 18rem, 11rem"
+							class="absolute inset-0 h-full w-full object-cover"
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
+	<Container className="mt-24 md:mt-28">
+		<div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+			<div class="flex flex-col gap-16">
+				{
+					posts.slice(0, 5).map((post) => (
+						<Card
+							key={post.id}
+							as="article"
+						>
+							<Card.Title href={`/posts/${post.id}`}>
+								{post.data.title}
+							</Card.Title>
+
+							{
+								post.data.date && (
+									<Card.Eyebrow
+										as="time"
+										dateTime={post.data.date.toISOString()}
+										decorate
+									>
+										{dateFormat(post.data.date)}
+									</Card.Eyebrow>
+								)
+							}
+
+							<Card.Description className="w-full prose">
+								<EntrySummary>
+									<EntryContent entry={post} />
+								</EntrySummary>
+							</Card.Description>
+							<Card.Cta>Read article</Card.Cta>
+						</Card>
+					))
+				}
+				<Button
+					className="group mt-6 w-full"
+					href="/posts"
+					variant="primary"
+				>
+					View more posts
+				</Button>
+			</div>
+			<div class="space-y-10 lg:pl-16 xl:pl-24">
+				<div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+					<h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+						<Icons.BriefcaseIcon className="h-6 w-6 flex-none" />
+						<span class="ml-3">Work</span>
+					</h2>
+					<ol class="mt-6 space-y-4">
+						{author?.works?.map((role) => <WorkRole {...role} />)}
+					</ol>
+					<Button
+						className="group mt-6 w-full"
+						href="#"
+						variant="secondary"
+					>
+						Download CV
+						<Icons.ArrowDownIcon
+							className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50"
+						/>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</Container>
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+import '@/assets/styles/main.css'
+
+import { getImage } from 'astro:assets'
+import Logo from '@/assets/images/logo.png'
+import Footer from '@/components/Footer.astro'
+import Header from '@/components/Header.astro'
+
+const favicon = await getImage({ src: Logo, format: 'png', width: 24 })
+
+type Props = { title?: string }
+
+const locale = Astro.currentLocale
+const props = Astro.props
+const siteTitle = Astro.url.host
+
+const title = props.title ?? siteTitle
+---
+
+<!DOCTYPE html>
+<html
+	lang={locale}
+	class="h-full antialiased"
+>
+	<head>
+		<meta charset="UTF-8">
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		>
+		<link
+			href={favicon.src}
+			rel="icon"
+			sizes="24x24"
+			type="image/png"
+		/>
+
+		<title>{title}</title>
+	</head>
+	<body class="flex h-full bg-zinc-50 dark:bg-black">
+		<div class="flex w-full">
+			<div class="fixed inset-0 flex justify-center sm:px-8">
+				<div class="flex w-full max-w-7xl lg:px-8">
+					<div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
+				</div>
+			</div>
+			<div class="relative flex w-full flex-col">
+				<Header />
+
+				<main class="flex-auto">
+					<slot />
+				</main>
+				<Footer />
+			</div>
+		</div>
+	</body>
+</html>

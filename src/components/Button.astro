@@ -1,0 +1,86 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+import { type VariantProps, cva } from 'class-variance-authority'
+
+const styles = cva(
+	[
+		'inline-flex',
+		'items-center',
+		'gap-2',
+		'justify-center',
+		'rounded-md',
+		'py-2',
+		'px-3',
+		'text-sm',
+		'outline-offset-2',
+		'transition active:transition-none',
+	],
+	{
+		variants: {
+			variant: {
+				primary: [
+					'bg-zinc-800',
+					'font-semibold',
+					'text-zinc-100',
+					'hover:bg-zinc-700',
+					'active:bg-zinc-800',
+					'active:text-zinc-100/70',
+					'dark:bg-zinc-700',
+					'dark:hover:bg-zinc-600',
+					'dark:active:bg-zinc-700',
+					'dark:active:text-zinc-100/70',
+				],
+				secondary: [
+					'bg-zinc-100',
+					'font-medium',
+					'text-zinc-900',
+					'hover:bg-zinc-200',
+					'active:bg-zinc-100',
+					'active:text-zinc-900/60',
+					'dark:bg-zinc-800/50',
+					'dark:text-zinc-300',
+					'dark:hover:bg-zinc-800',
+					'dark:hover:text-zinc-50',
+					'dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70',
+				],
+			},
+		},
+	},
+)
+
+type HTMLButtonOrLink = HTMLAttributes<'button' | 'a'>
+
+type Props = HTMLButtonOrLink &
+	VariantProps<typeof styles> & {
+		className: HTMLButtonOrLink['class']
+		href?: string
+	}
+
+const { type, href, variant, ...props } = Astro.props
+
+const className = styles({ variant, class: props.className })
+---
+
+<>
+	{
+		typeof href === 'undefined' ? (
+			<button
+				class={className}
+				type="button"
+				{...props}
+			>
+				<slot />
+			</button>
+		) : (
+			<a
+				class={className}
+				href={href}
+				type={type}
+				{...props}
+			>
+				<slot />
+			</a>
+		)
+	}
+</>
