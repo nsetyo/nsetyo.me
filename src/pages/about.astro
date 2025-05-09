@@ -5,16 +5,12 @@ import { getEntry } from 'astro:content'
 import { Image } from 'astro:assets'
 import { Container } from '@/components/Container'
 import * as Icons from '@/components/Icons'
-import * as MainMd from '@/content/index.md'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getConfig } from '@/utilities'
 
-const main = await getEntry('pages', MainMd.frontmatter.slug ?? 'index')
+const { title, description, author, page } = await getConfig()
 
-if (!main) throw new Error("Couldn't find main page")
-
-const { title, description, author } = main.data
-
-const { Content } = await render(main)
+const { Content } = await render(page)
 ---
 
 <BaseLayout title={title}>

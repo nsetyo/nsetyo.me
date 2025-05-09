@@ -1,10 +1,8 @@
 ---
 import { ContainerInner, ContainerOuter } from '@/components/Container'
-import { clss } from '@/utilities'
+import { clss, getMenu } from '@/utilities'
 
-import * as config from '@/consts'
-
-const menu = config.SITE_MENU
+const menu = await getMenu()
 ---
 
 <footer class="mt-32 flex-none">

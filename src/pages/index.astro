@@ -1,12 +1,11 @@
 ---
 import { Image } from 'astro:assets'
-import { getCollection, getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import Button from '@/components/Button.astro'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import * as Icons from '@/components/Icons'
-import * as MainMd from '@/content/index.md'
-import { clss, dateFormat } from '@/utilities'
+import { clss, dateFormat, getConfig } from '@/utilities'
 
 import EntryContent from '@/components/EntryContent.astro'
 import EntrySummary from '@/components/EntrySummary.astro'
@@ -33,11 +32,7 @@ const posts = (await getCollection('posts'))
 	})
 	.slice(0, 5)
 
-const main = await getEntry('pages', MainMd.frontmatter.slug ?? 'index')
-
-if (!main) throw new Error("Couldn't find main page")
-
-const { title, description, author } = main.data
+const { title, description, author } = await getConfig()
 ---
 
 <BaseLayout title={title}>
@@ -161,6 +156,7 @@ const { title, description, author } = main.data
 							alt=""
 							sizes="(min-width: 640px) 18rem, 11rem"
 							class="absolute inset-0 h-full w-full object-cover"
+							width={480}
 						/>
 					</div>
 				))

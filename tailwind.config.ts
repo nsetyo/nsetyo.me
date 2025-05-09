@@ -177,6 +177,11 @@ export default {
 						marginBottom: theme('spacing.6'),
 						paddingLeft: theme('spacing[3.5]'),
 					},
+					'.footnotes li': {
+						marginTop: theme('spacing.4'),
+						marginBottom: theme('spacing.4'),
+						paddingLeft: theme('spacing[3.5]'),
+					},
 					'.footnotes li::marker': {
 						fontWeight: `${theme('fontWeight.normal')} !important`,
 					},

@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-
-import { Container } from '@/components/Container'
-import { dateFormat } from '@/utilities'
+import type { CollectionKey } from 'astro:content'
 
 import { render } from 'astro:content'
+import { Container } from '@/components/Container'
+import { dateFormat } from '@/utilities'
 import BaseLayout from './BaseLayout.astro'
 
-type Props = CollectionEntry<'posts'>
+type Props = CollectionEntry<CollectionKey>
 
 const entry = Astro.props
 

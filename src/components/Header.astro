@@ -2,19 +2,12 @@
 import type { CSSProperties } from 'react'
 
 import { getImage } from 'astro:assets'
-import { getEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
 import { Container } from '@/components/Container'
-import { Avatar, AvatarContainer, DesktopNav, MobileNav, ThemeToggle } from '@/components/Header'
+import { Avatar, AvatarContainer, DesktopNav, MobileNav } from '@/components/Header'
 import { MoonIcon, SunIcon } from '@/components/Icons'
-import * as MainMd from '@/content/index.md'
-import { clss, toTitleCase } from '@/utilities'
+import { clss, getConfig, getMenu } from '@/utilities'
 
-const main = await getEntry('pages', MainMd.frontmatter.slug ?? 'index')
-
-if (!main) throw new Error("Couldn't find main page")
-
-const { author } = main.data
+const { author } = await getConfig()
 
 const avatar = author?.avatar
 	? await getImage({ src: author?.avatar, format: 'jpeg', width: 128 })
@@ -23,21 +16,7 @@ const avatar = author?.avatar
 const currentPath = Astro.url.pathname
 const isHome = currentPath === '/'
 
-const pages = await getCollection('pages')
-
-const menu = pages
-	.filter((p) => p.data.menu)
-	.map((p) => {
-		const menu = p.data.menu ?? 0
-
-		const data = { ...p.data, menu }
-
-		return { ...p, data }
-	})
-	.toSorted((a, b) => (b.data.menu > a.data.menu ? -1 : 1))
-	.map((p) => {
-		return { title: toTitleCase(p.id), href: `/${p.id}` }
-	})
+const menu = await getMenu()
 ---
 
 <header

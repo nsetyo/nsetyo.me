@@ -1,0 +1,250 @@
+---
+import { Container } from '@/components/Container'
+import * as Icons from '@/components/Icons'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { clss, getConfig } from '@/utilities'
+
+const { author } = await getConfig()
+
+if (!author) throw new Error('Author is empty')
+
+const { contacts, name, skills } = author
+
+const timeFormat = (val: Date | null | undefined) => {
+	if (!val) return 'Present'
+
+	return val.toLocaleDateString('en-US', {
+		month: 'short',
+		year: 'numeric',
+	})
+}
+
+const works = (author.works ?? []).map((w) => {
+	const { since, until } = w
+
+	const sinceStr = timeFormat(since)
+	const untilStr = timeFormat(until)
+
+	return { ...w, sinceStr, untilStr }
+})
+
+const educations = (author.educations ?? []).map((e) => {
+	const { since, until } = e
+
+	const sinceStr = timeFormat(since)
+	const untilStr = timeFormat(until)
+
+	return { ...e, sinceStr, untilStr }
+})
+
+const awards = (author.awards ?? []).map((e) => {
+	const { since } = e
+
+	const sinceStr = timeFormat(since)
+
+	return { ...e, sinceStr }
+})
+---
+
+<BaseLayout title="Resume">
+	<Container className="mt-16 sm:mt-32">
+		<div class="text-base text-zinc-600 dark:text-zinc-400">
+			<h1 class="text-center font-semibold text-2xl mb-4">
+				{name}
+			</h1>
+			<ul class="sm:flex sm:justify-center divide-zinc-500 dark:divide-zinc-700/40 sm:divide-x-2">
+				{
+					contacts?.email && (
+						<li class="px-4">
+							<a
+								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+								href={`mailto:${contacts.email}`}
+							>
+								<Icons.MailIcon
+									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+								/>
+								<span class="ml-2">
+									{contacts.email}
+								</span>
+							</a>
+						</li>
+					)
+				}
+				{
+					contacts?.linkedin && (
+						<li class="px-4">
+							<a
+								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+								href={contacts.linkedin}
+							>
+								<Icons.LinkedInIcon
+									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+								/>
+								<span class="ml-4">
+									{contacts.linkedin.replace('https://', '')}
+								</span>
+							</a>
+						</li>
+					)
+				}
+				{
+					contacts?.github && (
+						<li class="px-4">
+							<a
+								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+								href={contacts.github}
+							>
+								<Icons.GitHubIcon
+									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+								/>
+								<span class="ml-2">
+									{contacts.github.replace('https://', '')}
+								</span>
+							</a>
+						</li>
+					)
+				}
+			</ul>
+			<section class="mt-8">
+				<h2 class="font-semibold text-xl border-b">Experience</h2>
+				<ol>
+					{
+						works?.map(w => (
+							<li class="mt-2">
+								<dl class="grid grid-cols-12">
+									<dt class="sr-only">Role</dt>
+									<dd class="flex-none font-semibold col-span-3">
+										{w.title}
+									</dd>
+									<dt class="sr-only">Company</dt>
+									<dd class="flex-none font-semibold col-span-7">
+										{w.company}
+									</dd>
+									<dt class="sr-only">Date</dt>
+									<dd
+										class="flex items-center text-sm text-zinc-400 dark:text-zinc-500 col-span-2"
+										aria-label={`${w.since} until ${w.until}`}
+									>
+										<div class="w-40 flex justify-between ml-auto">
+											<time datetime={w.since.toISOString()}>
+												{w.sinceStr}
+											</time>
+											<span aria-hidden="true">—</span>
+											<time datetime={w.until && w.until.toISOString()}>
+												{w.untilStr}
+											</time>
+										</div>
+									</dd>
+								</dl>
+								<ol class="list-disc pl-4 md:pr-32">
+									{w.tasks?.map(t => <li class="text-sm">{t}</li>)}
+								</ol>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+			<section class="mt-8">
+				<h2 class="font-semibold text-xl border-b">Education</h2>
+				<ol>
+					{
+						educations?.map(e => (
+							<li class="mt-2">
+								<dl class="grid grid-cols-6">
+									<dt class="sr-only">Degree</dt>
+									<dd class="flex-none font-semibold col-span-4">
+										{e.title}
+									</dd>
+									<dt class="sr-only">Date</dt>
+									<dd
+										class="text-sm text-zinc-400 dark:text-zinc-500 col-span-2 flex items-center"
+										aria-label={`${e.sinceStr} until ${e.untilStr}`}
+									>
+										<div class="w-40 flex justify-between ml-auto">
+											<time datetime={e.since.toISOString()}>
+												{e.sinceStr}
+											</time>
+											<span aria-hidden="true">—</span>
+											<time datetime={e.until && e.until.toISOString()}>
+												{e.untilStr}
+											</time>
+										</div>
+									</dd>
+									<dt class="sr-only">University</dt>
+									<dd class="flex-none col-span-4 text-sm">
+										{e.university}
+									</dd>
+									<dt class="sr-only">Location</dt>
+									<dd class="text-sm col-span-2 text-right text-zinc-400 dark:text-zinc-500">
+										{e.location}
+									</dd>
+								</dl>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+			<section class="mt-8">
+				<h2 class="font-semibold text-xl border-b">Skills</h2>
+				<ol>
+					{
+						Object.entries(skills ?? {}).map(([s, v]) => (
+							<li class="mt-2">
+								<dl class="flex gap-2">
+									<dt class="font-semibold">{s}:</dt>
+									<dd>
+										{v}
+									</dd>
+								</dl>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+			<section class="mt-8">
+				<h2 class="font-semibold text-xl border-b">Awards, Honors, and Certification</h2>
+				<ol>
+					{
+						awards.map((a) => (
+							<li class="mt-2">
+								<dl class="flex gap-2">
+									<dt class="sr-only">Title</dt>
+									<dd class="font-semibold">
+										{a.title}
+									</dd>
+									<dt class="sr-only">Issuer</dt>
+									<dd>
+										{a.issuer}
+									</dd>
+									{
+										a.location && (
+											<dt class="sr-only">Location</dt>
+											<dd class="text-sm text-zinc-400 dark:text-zinc-500 flex items-center ml-auto">
+												{a.location},
+											</dd>
+										)
+									}
+									<dt class="sr-only">Date</dt>
+									<dd
+										class={clss(
+											'text-sm',
+											'text-zinc-400',
+											'dark:text-zinc-500',
+											'flex',
+											'items-center',
+											a.location ? '' : 'ml-auto',
+										)}
+									>
+										<time datetime={a.since.toISOString()}>
+											{a.sinceStr}
+										</time>
+									</dd>
+								</dl>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+		</div>
+	</Container>
+</BaseLayout>

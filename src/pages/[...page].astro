@@ -7,9 +7,13 @@ import ListLayout from '@/layouts/ListLayout.astro'
 import PostLayout from '@/layouts/PostLayout.astro'
 import type { GetStaticPathsOptions, Page } from 'astro'
 
-type EntryType = CollectionEntry<'posts'> | CollectionEntry<'pages'>
+type EntryType = CollectionEntry<CollectionKey>
 
-type Props = { page: EntryType; pagination?: Page<string> }
+type Props = {
+	page: EntryType
+	pagination?: Page<string>
+	section?: boolean
+}
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 	const sections = ['posts']
@@ -69,22 +73,18 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 				props: {
 					page: entry,
 					pagination: props.page,
+					section: true,
 				},
 			}
 		}),
 	]
 }
 
-const { page, pagination } = Astro.props
+const { page, pagination, section } = Astro.props
 ---
 
 {
-	page.collection === 'pages'
-		? (
-		<ListLayout
-			entry={page}
-			pagination={pagination}
-		/>
-	)
+	section
+		? <ListLayout {...{ entry: page, pagination }} />
 		: <PostLayout {...page} />
 }

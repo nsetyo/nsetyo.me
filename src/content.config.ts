@@ -16,6 +16,23 @@ const schema = ({ image }: SchemaContext) => {
 		logo: image(),
 		since: z.coerce.date(),
 		until: z.coerce.date().optional(),
+		tasks: z.string().array().optional(),
+	})
+
+	const educations = z.object({
+		university: z.string(),
+		title: z.string(),
+		location: z.string().optional(),
+		since: z.coerce.date(),
+		until: z.coerce.date().optional(),
+	})
+
+	const awards = z.object({
+		issuer: z.string(),
+		title: z.string(),
+		location: z.string().optional(),
+		since: z.coerce.date(),
+		link: z.string().url().optional(),
 	})
 
 	const author = z.object({
@@ -24,6 +41,9 @@ const schema = ({ image }: SchemaContext) => {
 		avatar: image().optional(),
 		contacts: contact.partial().optional(),
 		works: z.array(work).optional(),
+		educations: z.array(educations).optional(),
+		awards: z.array(awards).optional(),
+		skills: z.object({}).passthrough().optional(),
 	})
 
 	return z.object({

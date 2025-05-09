@@ -11,7 +11,7 @@ import SimpleLayout from '@/layouts/SimpleLayout.astro'
 import { dateFormat } from '@/utilities'
 
 type Props = {
-	entry: CollectionEntry<'pages'>
+	entry: CollectionEntry<CollectionKey>
 	pagination?: Page<string>
 }
 
@@ -60,7 +60,7 @@ const { next, prev } = pagination?.url ?? {}
 				entries.map(e => (
 					<article class="md:grid md:grid-cols-4 md:items-baseline">
 						<Card className="md:col-span-3">
-							<Card.Title href={`/${entry.collection}/${e.id}`}>
+							<Card.Title href={`/${entry.id}/${e.id}`}>
 								{e.data.title}
 							</Card.Title>
 							{
