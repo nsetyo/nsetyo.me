@@ -15,6 +15,7 @@ export async function GET(context: any) {
 			...post.data,
 			author: post.data.author?.name ?? author?.name,
 			link: `/posts/${post.id}/`,
+			pubDate: post.data.date,
 		})),
 	})
 }
