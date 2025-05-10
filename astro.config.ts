@@ -25,6 +25,9 @@ export default defineConfig({
 				},
 			],
 		],
+		shikiConfig: {
+			theme: 'material-theme',
+		},
 	},
 	vite: { plugins: [tailwindcss()] },
 })
