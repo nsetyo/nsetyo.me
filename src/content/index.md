@@ -59,7 +59,7 @@ author:
     educations:
         -
             title: Bachelor in Practical Cryptography Technique
-            university: Sekolah Tinggi Sandi Negara (National Crypto Institute)
+            university: National Crypto Institute (STSN)
             location: Bogor, Indonesia
             since: 2010-09-01
             until: 2014-09-01

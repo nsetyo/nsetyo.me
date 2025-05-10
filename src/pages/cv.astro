@@ -47,15 +47,15 @@ const awards = (author.awards ?? []).map((e) => {
 ---
 
 <BaseLayout title="Resume">
-	<Container className="mt-16 sm:mt-32">
+	<Container className="mt-16 sm:mt-32 print:mt-0">
 		<div class="text-base text-zinc-600 dark:text-zinc-400">
 			<h1 class="text-center font-semibold text-2xl mb-4">
 				{name}
 			</h1>
-			<ul class="sm:flex sm:justify-center divide-zinc-500 dark:divide-zinc-700/40 sm:divide-x-2">
+			<ul class="md:flex md:justify-center divide-zinc-500 dark:divide-zinc-700/40 md:divide-x-2">
 				{
 					contacts?.email && (
-						<li class="px-4">
+						<li class="md:px-4">
 							<a
 								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
 								href={`mailto:${contacts.email}`}
@@ -72,7 +72,7 @@ const awards = (author.awards ?? []).map((e) => {
 				}
 				{
 					contacts?.linkedin && (
-						<li class="px-4">
+						<li class="md:px-4">
 							<a
 								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
 								href={contacts.linkedin}
@@ -80,7 +80,7 @@ const awards = (author.awards ?? []).map((e) => {
 								<Icons.LinkedInIcon
 									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
 								/>
-								<span class="ml-4">
+								<span class="ml-2">
 									{contacts.linkedin.replace('https://', '')}
 								</span>
 							</a>
@@ -89,7 +89,7 @@ const awards = (author.awards ?? []).map((e) => {
 				}
 				{
 					contacts?.github && (
-						<li class="px-4">
+						<li class="md:px-4">
 							<a
 								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
 								href={contacts.github}
@@ -111,18 +111,18 @@ const awards = (author.awards ?? []).map((e) => {
 					{
 						works?.map(w => (
 							<li class="mt-2">
-								<dl class="grid grid-cols-12">
+								<dl class="grid grid-cols-2 md:grid-cols-12 md:mb-0 mb-2">
 									<dt class="sr-only">Role</dt>
-									<dd class="flex-none font-semibold col-span-3">
+									<dd class="flex-none font-semibold md:col-span-3">
 										{w.title}
 									</dd>
 									<dt class="sr-only">Company</dt>
-									<dd class="flex-none font-semibold col-span-7">
+									<dd class="flex-none text-sm md:font-semibold col-span-full md:col-span-7">
 										{w.company}
 									</dd>
 									<dt class="sr-only">Date</dt>
 									<dd
-										class="flex items-center text-sm text-zinc-400 dark:text-zinc-500 col-span-2"
+										class="flex items-center text-sm text-zinc-400 dark:text-zinc-500 md:col-span-2 col-start-2 col-end-3 row-start-1 md:-col-end-1"
 										aria-label={`${w.since} until ${w.until}`}
 									>
 										<div class="w-40 flex justify-between ml-auto">
@@ -152,7 +152,7 @@ const awards = (author.awards ?? []).map((e) => {
 							<li class="mt-2">
 								<dl class="grid grid-cols-6">
 									<dt class="sr-only">Degree</dt>
-									<dd class="flex-none font-semibold col-span-4">
+									<dd class="flex-none font-semibold col-span-4 truncate">
 										{e.title}
 									</dd>
 									<dt class="sr-only">Date</dt>
@@ -185,11 +185,13 @@ const awards = (author.awards ?? []).map((e) => {
 				</ol>
 			</section>
 			<section class="mt-8">
-				<h2 class="font-semibold text-xl border-b">Skills</h2>
+				<h2 class="font-semibold text-xl border-b mb-2">
+					Skills
+				</h2>
 				<ol>
 					{
 						Object.entries(skills ?? {}).map(([s, v]) => (
-							<li class="mt-2">
+							<li class="mb-1">
 								<dl class="flex gap-2">
 									<dt class="font-semibold">{s}:</dt>
 									<dd>
@@ -202,24 +204,26 @@ const awards = (author.awards ?? []).map((e) => {
 				</ol>
 			</section>
 			<section class="mt-8">
-				<h2 class="font-semibold text-xl border-b">Awards, Honors, and Certification</h2>
+				<h2 class="font-semibold text-xl border-b mb-2">
+					Awards, Honors, and Certification
+				</h2>
 				<ol>
 					{
 						awards.map((a) => (
-							<li class="mt-2">
+							<li class="mb-1">
 								<dl class="flex gap-2">
 									<dt class="sr-only">Title</dt>
-									<dd class="font-semibold">
+									<dd class="font-semibold truncate">
 										{a.title}
 									</dd>
 									<dt class="sr-only">Issuer</dt>
-									<dd>
+									<dd class="truncate">
 										{a.issuer}
 									</dd>
 									{
 										a.location && (
 											<dt class="sr-only">Location</dt>
-											<dd class="text-sm text-zinc-400 dark:text-zinc-500 flex items-center ml-auto">
+											<dd class="text-sm text-zinc-400 dark:text-zinc-500 flex items-center ml-auto whitespace-nowrap">
 												{a.location},
 											</dd>
 										)
@@ -227,6 +231,7 @@ const awards = (author.awards ?? []).map((e) => {
 									<dt class="sr-only">Date</dt>
 									<dd
 										class={clss(
+											'whitespace-nowrap',
 											'text-sm',
 											'text-zinc-400',
 											'dark:text-zinc-500',
