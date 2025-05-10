@@ -75,6 +75,10 @@ author:
             since: 2023-08-31
             location: Jakarta
         -
+            title: Third Place
+            issuer: Bank Negara Malaysia Online AMLHackathon
+            since: 2023-07-07
+        -
             title: Certified Ethical Hacker
             issuer: EC-Council
             since: 2022-06-07
