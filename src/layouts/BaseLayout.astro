@@ -14,7 +14,7 @@ const locale = Astro.currentLocale
 const props = Astro.props
 const siteTitle = Astro.url.host
 
-const title = props.title ?? siteTitle
+const title = props.title ? `${props.title} — ${siteTitle}` : siteTitle
 ---
 
 <!DOCTYPE html>

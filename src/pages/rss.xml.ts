@@ -1,8 +1,11 @@
+import { site } from 'astro:config/client'
 import { getCollection } from 'astro:content'
 import { getConfig } from '@/utilities'
 import rss from '@astrojs/rss'
 
-const { title, description, author } = await getConfig()
+const { description, author } = await getConfig()
+
+const title = site?.replace('https://', '') ?? ''
 
 export async function GET(context: any) {
 	const posts = await getCollection('posts')
@@ -14,7 +17,7 @@ export async function GET(context: any) {
 		items: posts.map((post) => ({
 			...post.data,
 			author: post.data.author?.name ?? author?.name,
-			link: `/posts/${post.id}/`,
+			link: `/posts/${post.id}`,
 			pubDate: post.data.date,
 		})),
 	})
