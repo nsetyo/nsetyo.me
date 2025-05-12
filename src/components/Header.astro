@@ -3,9 +3,10 @@ import type { CSSProperties } from 'react'
 
 import { getImage } from 'astro:assets'
 import { Container } from '@/components/Container'
-import { Avatar, AvatarContainer, DesktopNav, MobileNav } from '@/components/Header'
+import { Avatar, AvatarContainer } from '@/components/Header'
+import { DesktopNav, MobileNav } from '@/components/HeaderNav'
 import { MoonIcon, SunIcon } from '@/components/Icons'
-import { clss, getConfig, getMenu } from '@/utilities'
+import { clss, clsx, getConfig, getMenu } from '@/utilities'
 
 const { author } = await getConfig()
 
@@ -98,11 +99,20 @@ const menu = await getMenu()
 				</div>
 				<div class="flex flex-1 justify-end md:justify-center">
 					<MobileNav
-						className="pointer-events-auto md:hidden"
+						className={clsx(
+							'pointer-events-auto',
+							'md:hidden',
+							menu.length < 3 && 'hidden',
+						)}
 						menu={menu}
+						client:load
 					/>
 					<DesktopNav
-						className="pointer-events-auto hidden md:block"
+						className={clsx(
+							'pointer-events-auto',
+							'md:block',
+							menu.length < 3 ? 'block' : 'hidden',
+						)}
 						active={currentPath}
 						menu={menu}
 					/>
