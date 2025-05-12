@@ -55,7 +55,7 @@ const title = pageTitle ? `${pageTitle} — ${siteTitle}` : siteTitle
 		>
 		<meta
 			property="og:description"
-			content={context.description}
+			content={context.description?.trim()}
 		>
 
 		<meta

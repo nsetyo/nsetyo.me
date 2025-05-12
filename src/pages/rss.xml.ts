@@ -12,7 +12,7 @@ export async function GET(context: any) {
 
 	return rss({
 		title,
-		description: description ?? '',
+		description: description?.trim() ?? '',
 		site: context.site,
 		items: posts.map((post) => ({
 			...post.data,
