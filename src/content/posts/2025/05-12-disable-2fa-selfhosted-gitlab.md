@@ -1,6 +1,6 @@
 ---
 title: Disable 2FA on Self Hosted Gitlab
-date: 2025-05-10
+date: 2025-05-12
 ---
 
 Last time, I lost login access to my self-hosted GitLab instance where I was the

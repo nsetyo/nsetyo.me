@@ -39,7 +39,7 @@ author:
                     crime investigations.
         -
             company: Lembaga Sandi Negara (now BSSN)
-            title: Administration Staff
+            title: Planning and Budgeting Staff
             logo: ../assets/images/logo-bssn.png
             since: 2014-12-01
             until: 2016-09-01
@@ -64,8 +64,8 @@ author:
             since: 2010-09-01
             until: 2014-09-01
     skills:
-        Programming Language: Javascript/Typescipt, HTML/CSS, PHP
-        Tools and Frameworks: Git, GNU/Linux, Podman/Docker
+        Programming Language: Javascript/Typescipt, HTML/CSS, PHP, Rust
+        Tools and Frameworks: Laravel, Vue, Git, GNU/Linux, Podman/Docker
         Languages: English (proficient), Indonesia (native)
 
     awards:

@@ -113,7 +113,7 @@ const awards = (author.awards ?? []).map((e) => {
 							<li class="mt-2">
 								<dl class="grid grid-cols-2 md:grid-cols-12 md:mb-0 mb-2">
 									<dt class="sr-only">Role</dt>
-									<dd class="flex-none font-semibold md:col-span-3 row-start-1">
+									<dd class="flex-none font-semibold md:col-span-4 row-start-1">
 										{w.title}
 									</dd>
 									<dt class="sr-only">Date</dt>
@@ -192,8 +192,8 @@ const awards = (author.awards ?? []).map((e) => {
 					{
 						Object.entries(skills ?? {}).map(([s, v]) => (
 							<li class="mb-1">
-								<dl class="flex gap-2">
-									<dt class="font-semibold">{s}:</dt>
+								<dl class="md:flex gap-2 grid grid-cols-2">
+									<dt class="font-semibold whitespace-nowrap">{s}:</dt>
 									<dd>
 										{v}
 									</dd>
