@@ -1,20 +1,30 @@
 ---
 import '@/assets/styles/main.css'
 
+import type { CollectionEntry } from 'astro:content'
+import type { CollectionKey } from 'astro:content'
+
 import { getImage } from 'astro:assets'
+import { SITE_TITLE } from 'astro:env/server'
 import Logo from '@/assets/images/logo.png'
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
 
 const favicon = await getImage({ src: Logo, format: 'png', width: 24 })
 
-type Props = { title?: string }
+type Entry = CollectionEntry<CollectionKey>
+
+type Props = Partial<Entry['data']> & { page: Entry }
 
 const locale = Astro.currentLocale
 const props = Astro.props
-const siteTitle = Astro.url.host
+const page = props.page
+const context = page.data
 
-const title = props.title ? `${props.title} — ${siteTitle}` : siteTitle
+const siteTitle = SITE_TITLE
+const pageTitle = props.title ?? context.title
+
+const title = pageTitle ? `${pageTitle} — ${siteTitle}` : siteTitle
 ---
 
 <!DOCTYPE html>
@@ -38,6 +48,19 @@ const title = props.title ? `${props.title} — ${siteTitle}` : siteTitle
 		<meta
 			property="og:url"
 			content={Astro.url}
+		>
+		<meta
+			property="og:site_name"
+			content={siteTitle}
+		>
+		<meta
+			property="og:description"
+			content={context.description}
+		>
+
+		<meta
+			property="og:type"
+			content="website"
 		>
 
 		<title>{title}</title>

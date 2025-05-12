@@ -9,14 +9,14 @@ import BaseLayout from './BaseLayout.astro'
 
 type Props = CollectionEntry<CollectionKey>
 
-const entry = Astro.props
+const page = Astro.props
 
-const { title, date, description } = entry.data
+const { title, date } = page.data
 
-const { Content } = await render(entry)
+const { Content } = await render(page)
 ---
 
-<BaseLayout title={title}>
+<BaseLayout page={page}>
 	<Container className="mt-16 lg:mt-32 print:mt-0">
 		<div class="xl:relative">
 			<div class="mx-auto max-w-2xl">

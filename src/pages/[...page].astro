@@ -85,6 +85,6 @@ const { page, pagination, section } = Astro.props
 
 {
 	section
-		? <ListLayout {...{ entry: page, pagination }} />
+		? <ListLayout {...{ page, pagination }} />
 		: <PostLayout {...page} />
 }

@@ -1,19 +1,17 @@
 ---
-import { render } from 'astro:content'
-import { getEntry } from 'astro:content'
-
 import { Image } from 'astro:assets'
+import { render } from 'astro:content'
 import { Container } from '@/components/Container'
 import * as Icons from '@/components/Icons'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { getConfig } from '@/utilities'
 
-const { title, description, author, page } = await getConfig()
+const { description, author, page } = await getConfig()
 
 const { Content } = await render(page)
 ---
 
-<BaseLayout title={title}>
+<BaseLayout page={page}>
 	<Container className="mt-16 sm:mt-32">
 		<div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
 			{

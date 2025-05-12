@@ -4,7 +4,7 @@ import * as Icons from '@/components/Icons'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { clss, getConfig } from '@/utilities'
 
-const { author } = await getConfig()
+const { author, page } = await getConfig()
 
 if (!author) throw new Error('Author is empty')
 
@@ -46,7 +46,10 @@ const awards = (author.awards ?? []).map((e) => {
 })
 ---
 
-<BaseLayout title="Resume">
+<BaseLayout
+	title="Resume"
+	page={page}
+>
 	<Container className="mt-16 sm:mt-32 print:mt-0">
 		<div class="text-base text-zinc-600 dark:text-zinc-400">
 			<h1 class="text-center font-semibold text-2xl mb-4">

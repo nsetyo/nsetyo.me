@@ -11,30 +11,22 @@ import SimpleLayout from '@/layouts/SimpleLayout.astro'
 import { dateFormat } from '@/utilities'
 
 type Props = {
-	entry: CollectionEntry<CollectionKey>
+	page: CollectionEntry<CollectionKey>
 	pagination?: Page<string>
 }
 
-const { entry, pagination } = Astro.props
+const { page, pagination } = Astro.props
 
-const { title, description } = entry.data
+const collection = page.id as CollectionKey
 
 const data = pagination?.data ?? []
 
-const entries = await getEntries(
-	data.map((item) => ({
-		collection: entry.id as CollectionKey,
-		id: item,
-	})),
-)
+const entries = await getEntries(data.map((item) => ({ collection, id: item })))
 
 const { next, prev } = pagination?.url ?? {}
 ---
 
-<SimpleLayout
-	description={description}
-	title={title}
->
+<SimpleLayout page={page}>
 	{
 		prev && (
 			<div class="md:pl-6 mb-12">
@@ -43,7 +35,7 @@ const { next, prev } = pagination?.url ?? {}
 						<div class="md:col-span-3 md:-col-end-1 group relative flex flex-col items-start">
 							<Button
 								className="group w-full"
-								href={`/${entry.id}${prev}`}
+								href={`/${collection}${prev}`}
 								variant="secondary"
 							>
 								View previous posts
@@ -60,7 +52,7 @@ const { next, prev } = pagination?.url ?? {}
 				entries.map(e => (
 					<article class="md:grid md:grid-cols-4 md:items-baseline">
 						<Card className="md:col-span-3">
-							<Card.Title href={`/${entry.id}/${e.id}`}>
+							<Card.Title href={`/${collection}/${e.id}`}>
 								{e.data.title}
 							</Card.Title>
 							{
@@ -107,7 +99,7 @@ const { next, prev } = pagination?.url ?? {}
 						<div class="md:col-span-3 md:-col-end-1 group relative flex flex-col items-start">
 							<Button
 								className="group w-full"
-								href={`/${entry.id}${next}`}
+								href={`/${collection}${next}`}
 								variant="secondary"
 							>
 								View next posts

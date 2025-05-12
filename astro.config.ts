@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config'
+import { defineConfig, envField } from 'astro/config'
 
 import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
@@ -7,8 +7,20 @@ import tailwindcss from '@tailwindcss/vite'
 import rehypeClassNames from 'rehype-class-names'
 import emoji from 'remark-emoji'
 
+const SITE = 'nsetyo.me'
+
 export default defineConfig({
-	site: 'https://nsetyo.me',
+	site: `https://${SITE}`,
+	env: {
+		schema: {
+			SITE_TITLE: envField.string({
+				access: 'public',
+				context: 'server',
+				default: SITE,
+				optional: true,
+			}),
+		},
+	},
 	image: {
 		service: {
 			entrypoint: 'src/images.ts',
@@ -16,7 +28,14 @@ export default defineConfig({
 	},
 	integrations: [mdx(), sitemap(), react()],
 	markdown: {
-		remarkPlugins: [[emoji, { accessible: true }]],
+		remarkPlugins: [
+			[
+				emoji,
+				{
+					accessible: true,
+				},
+			],
+		],
 		rehypePlugins: [
 			[
 				rehypeClassNames,

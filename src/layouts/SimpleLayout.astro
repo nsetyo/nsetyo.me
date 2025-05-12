@@ -1,12 +1,19 @@
 ---
-import { Container } from '@/components/Container'
+import type { ComponentProps } from 'astro/types'
+
+import assert from 'node:assert/strict'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-type Props = { title: string; description?: string }
+import { Container } from '@/components/Container'
 
-const { title, description } = Astro.props
+type Props = ComponentProps<typeof BaseLayout>
+
+const { props } = Astro
+const { title, description } = props
+
+assert(BaseLayout)
 ---
-<BaseLayout title={title}>
+<BaseLayout {...props}>
 	<Container className="mt-16 sm:mt-32">
 		<header class="max-w-2xl">
 			<h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
