@@ -120,5 +120,3 @@ still to explore. Technology moves so fast—new tools and languages are always
 popping up. I love that about it. Lately, I’ve been getting into Rust because
 it’s fast and pretty cool. There’s always something new to try, and that’s what
 keeps me excited about this.
-
-I can’t wait to see where it takes me next.
