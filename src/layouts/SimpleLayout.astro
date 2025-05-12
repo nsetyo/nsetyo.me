@@ -9,7 +9,7 @@ import { Container } from '@/components/Container'
 type Props = ComponentProps<typeof BaseLayout>
 
 const { props } = Astro
-const { title, description } = props
+const { title, description } = props.page.data
 
 assert(BaseLayout)
 ---
