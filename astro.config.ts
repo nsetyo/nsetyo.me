@@ -23,6 +23,7 @@ export default defineConfig({
 			SITE_LOCALE: envField.string({
 				access: 'public',
 				context: 'server',
+				default: 'en',
 				optional: true,
 			}),
 		},
