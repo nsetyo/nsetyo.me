@@ -19,7 +19,7 @@ author:
         -
             company: Pusat Pelaporan dan Analisis Transaksi Keuangan
             title: Software Engineer
-            logo: ../assets/images/logo-ppatk.png
+            logo: ../assets/images/work-ppatk.png
             since: 2016-10-01
             tasks:
                 - >
@@ -40,7 +40,7 @@ author:
         -
             company: Lembaga Sandi Negara (now BSSN)
             title: Planning and Budgeting Staff
-            logo: ../assets/images/logo-bssn.png
+            logo: ../assets/images/work-bssn.png
             since: 2014-12-01
             until: 2016-09-01
             tasks:

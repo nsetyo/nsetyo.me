@@ -5,39 +5,38 @@ import type { CollectionEntry } from 'astro:content'
 import type { CollectionKey } from 'astro:content'
 
 import { getImage } from 'astro:assets'
-import { SITE_TITLE } from 'astro:env/server'
-import Logo from '@/assets/images/logo.png'
+import { SITE_LOCALE, SITE_TITLE } from 'astro:env/server'
+import Favicon from '@/assets/images/favicon.png'
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
+import HtmlMeta from '@/components/HtmlMeta.astro'
 
-const favicon = await getImage({ src: Logo, format: 'png', width: 24 })
+const favicon = await getImage({ src: Favicon, format: 'png', width: 24 })
 
 type Entry = CollectionEntry<CollectionKey>
 
 type Props = Partial<Entry['data']> & { page: Entry }
 
-const locale = Astro.currentLocale
+const locale = SITE_LOCALE
+const siteTitle = SITE_TITLE
+
 const props = Astro.props
+
 const page = props.page
 const context = page.data
 
-const siteTitle = SITE_TITLE
 const pageTitle = props.title ?? context.title
-
 const title = pageTitle ? `${pageTitle} — ${siteTitle}` : siteTitle
 ---
 
 <!DOCTYPE html>
 <html
-	lang={locale}
 	class="h-full antialiased"
+	lang={locale}
 >
 	<head>
-		<meta charset="UTF-8">
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		>
+		<HtmlMeta page={page} />
+
 		<link
 			href={favicon.src}
 			rel="icon"
@@ -45,22 +44,16 @@ const title = pageTitle ? `${pageTitle} — ${siteTitle}` : siteTitle
 			type="image/png"
 		/>
 
-		<meta
-			property="og:url"
-			content={Astro.url}
-		>
-		<meta
-			property="og:site_name"
-			content={siteTitle}
-		>
-		<meta
-			property="og:description"
-			content={context.description?.trim()}
-		>
+		<link
+			rel="sitemap"
+			href="/sitemap-index.xml"
+		/>
 
-		<meta
-			property="og:type"
-			content="website"
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={siteTitle}
+			href="/rss.xml"
 		>
 
 		<title>{title}</title>

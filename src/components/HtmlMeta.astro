@@ -1,0 +1,43 @@
+---
+import type { CollectionKey } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+
+import { SITE_TITLE } from 'astro:env/server'
+
+type Entry = CollectionEntry<CollectionKey>
+
+type Props = { page: Entry }
+
+const context = Astro.props.page
+
+const description = context.data.description ?? context.body?.split('.').slice(0, 2).join('.') ?? ''
+---
+
+<>
+	<meta charset="UTF-8">
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0"
+	>
+	<meta
+		name="description"
+		content={`${description.trim()}...`}
+	>
+
+	<meta
+		property="og:url"
+		content={Astro.url}
+	>
+	<meta
+		property="og:site_name"
+		content={SITE_TITLE}
+	>
+	<meta
+		property="og:description"
+		content={`${description.trim()}...`}
+	>
+	<meta
+		property="og:type"
+		content="website"
+	>
+</>

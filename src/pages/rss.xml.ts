@@ -1,3 +1,5 @@
+import type { APIRoute } from 'astro'
+
 import { site } from 'astro:config/client'
 import { getCollection } from 'astro:content'
 import { getConfig } from '@/utilities'
@@ -7,7 +9,7 @@ const { description, author } = await getConfig()
 
 const title = site?.replace('https://', '') ?? ''
 
-export async function GET(context: any) {
+export const GET: APIRoute = async (context: any) => {
 	const posts = await getCollection('posts')
 
 	return rss({
