@@ -1,6 +1,5 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { Popover, PopoverBackdrop, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { twJoin } from 'tailwind-merge'
 import { ChevronDownIcon, CloseIcon } from './Icons'
 
@@ -19,14 +18,14 @@ export function MobileNavItem({ href, children }: { href: string; children: Reac
 
 type Nav = { title: string; href: string }
 
-type MobileNavProps = ComponentPropsWithoutRef<typeof Popover> & {
+type MobileNavProps = ComponentPropsWithoutRef<'div'> & {
 	menu?: Nav[]
 }
 
 export function MobileNav({ menu, ...props }: MobileNavProps) {
 	return (
-		<Popover {...props}>
-			<PopoverButton
+		<div {...props}>
+			<button
 				className={twJoin(
 					'group',
 					'flex',
@@ -60,10 +59,11 @@ export function MobileNav({ menu, ...props }: MobileNavProps) {
 						'dark:group-hover:stroke-zinc-400',
 					)}
 				/>
-			</PopoverButton>
-			<PopoverBackdrop
-				transition
+			</button>
+			<div
 				className={twJoin(
+					'data-closed',
+					'pointer-events-none',
 					'fixed',
 					'inset-0',
 					'z-50',
@@ -76,9 +76,7 @@ export function MobileNav({ menu, ...props }: MobileNavProps) {
 					'dark:bg-black/80',
 				)}
 			/>
-			<PopoverPanel
-				focus
-				transition
+			<div
 				className={twJoin(
 					'fixed',
 					'inset-x-4',
@@ -100,12 +98,12 @@ export function MobileNav({ menu, ...props }: MobileNavProps) {
 				)}
 			>
 				<div className="flex flex-row-reverse items-center justify-between">
-					<PopoverButton
+					<button
 						aria-label="Close menu"
 						className="-m-1 p-1"
 					>
 						<CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
-					</PopoverButton>
+					</button>
 					<h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Navigation</h2>
 				</div>
 				<nav className="mt-6">
@@ -130,8 +128,8 @@ export function MobileNav({ menu, ...props }: MobileNavProps) {
 						))}
 					</ul>
 				</nav>
-			</PopoverPanel>
-		</Popover>
+			</div>
+		</div>
 	)
 }
 

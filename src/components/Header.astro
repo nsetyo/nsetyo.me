@@ -98,15 +98,18 @@ const menu = await getMenu()
 					}
 				</div>
 				<div class="flex flex-1 justify-end md:justify-center">
-					<MobileNav
-						className={clsx(
-							'pointer-events-auto',
-							'md:hidden',
-							menu.length < 3 && 'hidden',
-						)}
-						menu={menu}
-						client:load
-					/>
+					{
+						menu.length > 2 && (
+							<MobileNav
+								className={clsx(
+									'pointer-events-auto',
+									'md:hidden',
+								)}
+								menu={menu}
+								client:load
+							/>
+						)
+					}
 					<DesktopNav
 						className={clsx(
 							'pointer-events-auto',
