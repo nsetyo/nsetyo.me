@@ -5,103 +5,100 @@ tags:
     - Web Development
 ---
 
-In a world where online privacy and security are becoming increasingly vital,
-the advent of onion domains has emerged as a groundbreaking solution. Onion
-domains, also known as Tor hidden services, offer a unique and anonymous way to
-access websites while shielding the identities of both the website operators and
-users. In this blog post, I will delve into the fascinating world of onion
-domains, uncovering how to host an onion web server.
+Lately, I’ve been playing around with ways to keep my online activity more
+private: **onion domains**. These are special websites you can access using the
+Tor network, and they keep both the site owner and visitors anonymous.
 
-### Connecting to the Tor Network
+In this post, I’ll share how I made my own onion site. It was surprisingly easy,
+and I’ll walk you through everything step by step.
 
-The first thing to do to join the Tor network is installing the Tor client. On
-Linux we can do this by using command:
+### 🧑‍💻 Step 1: Installing Tor
+
+First, I installed Tor on my Linux machine. If you’re using Linux too, just run:
 
 ```bash
 sudo apt install tor torsocks
 ```
 
-After that, we can start the Tor service:
+Then, I started the Tor service:
 
 ```bash
 sudo systemctl start tor
 ```
 
-Check the status of Tor service
+To check if it’s working:
 
 ```bash
 sudo systemctl status tor
-● tor.service - Anonymizing overlay network for TCP
-     Loaded: loaded (/usr/lib/systemd/system/tor.service; disabled; preset: disabled)
-    Drop-In: /usr/lib/systemd/system/service.d
-             └─10-timeout-abort.conf
-     Active: active (running) since Tue 2023-07-25 09:59:24 WIB; 1s ago
-    Process: 668298 ExecStartPre=/usr/bin/tor --runasdaemon 0 --defaults-torrc /usr/share/tor/defaults-torrc -f /etc/tor/torrc --verify-config (code=exited, status=0/SUCCESS)
-   Main PID: 668309 (tor)
-      Tasks: 1 (limit: 23166)
-     Memory: 57.2M
-        CPU: 410ms
-     CGroup: /system.slice/tor.service
 ```
 
-### Testing the tor connection
+If it says “active (running)”, you’re good!
 
-To test the Tor connection, first we need to know our IP address
+### 🔍 Step 2: Checking My IP
+
+Before using Tor, I checked my regular IP address:
 
 ```bash
 wget -qO - https://api.ipify.org; echo
+```
 
+Mine was something like:
+
+```
 103.105.71.193
 ```
 
-**103.105.71.193** is our IP address before using Tor network. Now we can
-connect to Tor network using `torsocks` command
+Then I used Tor to check it again:
 
 ```bash
 torsocks wget -qO - https://api.ipify.org; echo
+```
 
+This time it changed to:
+
+```
 185.220.101.77
 ```
 
-We can see from the command result that our IP address is **185.220.101.77**
+That means Tor is working! 🎉
 
-### Create a Hidden Service
+### 🌐 Step 3: Setting Up the Onion Website
 
-Creating a website on onion domain is as easy as creating a website on clearnet
-(regular internet). All we have to do is connect to the Tor network and declare
-a hidden service in Tor's config. To declare a hidden service, edit the torrc at
-`/etc/tor/torrc` (might be different, depends on the installation of the Tor
-client)
+To make my website available as an onion site, I just had to add a few lines to
+Tor’s config file. I opened the file:
 
-Here is the important line of the torrc:
+```bash
+sudo vim /etc/tor/torrc
+```
+
+Then added this at the bottom:
 
 ```
 HiddenServiceDir /var/lib/tor/other_hidden_service/
 HiddenServicePort 80 localhost:80
 ```
 
-`HiddenServicePort 80 localhost:80` means we declare hidden service on port 80
-on our local server (I already have a normal web server listening on localhost
-port 80). Restart the Tor service
+This tells Tor to make a hidden service pointing to my local web server on
+port 80. After saving, I restarted Tor:
 
 ```bash
 sudo systemctl restart tor
 ```
 
-Now we have declared the hidden service we host. To access the hidden service,
-we need to know our onion domain. See the content of
-`/var/lib/tor/other_hidden_service/hostname`.
+### 🧅 Step 4: Getting My Onion Address
+
+Tor will create a folder with your new onion address. I just ran:
 
 ```bash
 cat /var/lib/tor/other_hidden_service/hostname
+```
 
+And it gave me something like:
+
+```bash
 u6jmq7d6bgu5appup3u4qz6ugd57axho3ibaxa4vj7faakrzrkkoo5id.onion
 ```
 
-The `u6jmq7d6bgu5appup3u4qz6ugd57axho3ibaxa4vj7faakrzrkkoo5id.onion` from
-`hostname` is our onion domain. That is a real onion domain you can access using
-Tor.
+That’s it — that’s my onion site! You can open it using the Tor Browser.
 
 ![nsetyo.me on onion](images/Screenshot_2023-07-25_11-02-58.png)
-
-So easy isn't it?
