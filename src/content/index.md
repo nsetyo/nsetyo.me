@@ -65,7 +65,7 @@ author:
             until: 2014-09-01
     skills:
         Programming Language: Javascript/Typescipt, HTML/CSS, PHP, Rust
-        Tools and Frameworks: Laravel, Vue, Git, GNU/Linux, Podman/Docker
+        Tools and Frameworks: Laravel, Vue, React, Git, GNU/Linux, Podman/Docker
         Languages: English (proficient), Indonesia (native)
 
     awards:
