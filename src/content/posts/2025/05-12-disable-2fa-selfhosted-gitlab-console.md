@@ -40,4 +40,4 @@ The expected response should be:
 => {:status=>:success}
 ```
 
-That’s it — 2FA should now be disabled.
+That’s it, 2FA should now be disabled.

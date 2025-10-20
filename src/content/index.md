@@ -103,13 +103,6 @@ Ever since I was a kid, I’ve had a special connection with computers. I don’
 remember exactly when it started, but I remember the awe I felt the first time I
 sat in front of a computer screen. I was hooked.
 
-In 9th grade, I got my first personal computer. It wasn’t new, but I didn’t
-care. I spent hours taking it apart and putting it back together, making
-mistakes along the way. I’d tweak the operating system, adjust settings, and
-mess with configurations just to see what happened. I remember installing
-different operating systems, sometimes breaking things, but always figuring out
-how to fix them.
-
 Though I taught myself programming on my own, it wasn’t until college that I had
 my first formal programming class. I learned languages like C, PHP, and Java,
 and even studied assembly in my electronics class. I also took a cryptography

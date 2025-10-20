@@ -1,4 +1,4 @@
 [tools]
 biome = "1.9.4"
 dprint = "0.50.0"
-node = "24.0.2"
+node = "latest"
