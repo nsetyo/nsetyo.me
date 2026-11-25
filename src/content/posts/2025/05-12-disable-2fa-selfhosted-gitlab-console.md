@@ -1,6 +1,7 @@
 ---
 title: Disable 2FA on Self Hosted Gitlab
 date: 2025-05-12
+image: ./hero-disable-2fa.webp
 ---
 
 Last time, I lost login access to my self-hosted GitLab instance where I was the

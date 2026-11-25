@@ -1,6 +1,6 @@
 ---
 title: Menginstal Nextcloud Server
-image: /media/201703/03-nextcloud.png
+image: ./images/nextcloud.png
 date: 2017-03-04T14:53:19+07:00
 tags:
     - GNU/Linux

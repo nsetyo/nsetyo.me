@@ -2,7 +2,7 @@
 title:
     Mengatasi Permasalahan CPU Usage Pada Pemasangan HDD Caddy di Laptop HP
     14-R202TX
-image: images/caddy2.jpg
+image: ./images/caddy2.jpg
 date: 2017-04-08T13:37:31+07:00
 tags:
     - Troubleshoot

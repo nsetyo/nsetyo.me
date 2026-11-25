@@ -1,6 +1,7 @@
 ---
 title: Mengembalikan Icon Hijau HTTPS Pada Mozilla Firefox
 date: 2019-11-21
+image: ./hero-https-firefox.webp
 ---
 
 Setelah sebelumnya saya membuat artikel tentang https, saya jadi menyadari kalau

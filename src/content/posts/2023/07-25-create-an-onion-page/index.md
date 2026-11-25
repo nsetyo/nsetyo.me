@@ -1,6 +1,7 @@
 ---
 title: Create A Website on Onion Domain
 date: 2023-07-25
+image: ./hero-onion.webp
 tags:
     - Web Development
 ---

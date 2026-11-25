@@ -50,6 +50,7 @@ const schema = ({ image }: SchemaContext) => {
 		title: z.string(),
 		description: z.string().optional(),
 		date: z.coerce.date().optional(),
+		image: image().optional(),
 		author: author.optional(),
 	})
 }

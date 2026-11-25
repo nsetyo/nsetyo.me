@@ -1,6 +1,7 @@
 ---
 title: Reset root password MySQL/MariaDB
 date: 2020-05-29
+image: ./hero-reset-mysql.webp
 tags:
     - GNU/Linux
     - Web Development
