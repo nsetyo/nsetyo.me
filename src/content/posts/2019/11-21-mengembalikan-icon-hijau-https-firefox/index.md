@@ -1,29 +1,28 @@
 ---
-title: Mengembalikan Icon Hijau HTTPS Pada Mozilla Firefox
+title: Restoring the Green HTTPS Icon in Mozilla Firefox
 date: 2019-11-21
 image: ./hero-https-firefox.webp
 ---
 
-Setelah sebelumnya saya membuat artikel tentang https, saya jadi menyadari kalau
-Mozilla Firefox sekarang akan menampilkan icon gembok berwarna abu-abu untuk
-laman https alih-alih gembok hijau[^1].
+After writing my previous article about HTTPS, I noticed that Mozilla Firefox
+now shows a grey padlock icon for HTTPS pages instead of a green one.[^1]
 
 ![Display of https website in firefox before and after change](images/identity_icons.png)
 
 <!--more-->
 
-Saya pribadi lebih menyukai https digambarkan dengan icon gembok berwarna hijau,
-jadi untuk mengembalikannya saya mengubah konfigurasi `about:config` pada key
-`security.secure_connection_icon_color_gray.` Ubah value pada key tersebut
-menjadi `false` lalu restart browser.
+I personally prefer HTTPS to be shown with a green padlock icon, so to bring
+it back I changed the `about:config` setting
+`security.secure_connection_icon_color_gray`. Set its value to `false`, then
+restart the browser.
 
-Sebagai tambahan kita juga bisa membuat firefox menampilkan informasi EV
-(_Extended Validation_) Certificate dengan mengubah key
-`security.identityblock.show_extended_validation` menjadi true
+As a bonus, you can also make Firefox show EV (_Extended Validation_)
+certificate information by setting
+`security.identityblock.show_extended_validation` to `true`.
 
-![Https before show ev](images/Screenshot_2019-11-21_10-49-13.png)
+![HTTPS without EV certificate info](images/Screenshot_2019-11-21_10-49-13.png)
 
-![Https after show ev](images/Screenshot_2019-11-21_10-49-34.png)
+![HTTPS with EV certificate info](images/Screenshot_2019-11-21_10-49-34.png)
 
 [^1]:
     https://blog.mozilla.org/security/2019/10/15/improved-security-and-privacy-indicators-in-firefox-70/
