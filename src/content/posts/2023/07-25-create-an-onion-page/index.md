@@ -45,7 +45,7 @@ wget -qO - https://api.ipify.org; echo
 Mine was something like:
 
 ```
-103.105.71.193
+203.0.113.42
 ```
 
 Then I used Tor to check it again:
