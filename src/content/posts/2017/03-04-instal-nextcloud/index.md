@@ -1,5 +1,5 @@
 ---
-title: Menginstal Nextcloud Server
+title: Installing Nextcloud Server
 image: ./images/nextcloud.png
 date: 2017-03-04T14:53:19+07:00
 tags:
@@ -9,11 +9,10 @@ tags:
 
 ### System Requirements
 
-Untuk menjalankan Nextcloud Server direkomendasikan untuk memenuhi persyaratan
-berikut:
+To run Nextcloud Server, it's recommended to meet the following requirements:
 
 - 512MB RAM
-- Linux Server (Direkomendasikan Debian 7, SUSE Linux Enterprise Server 11 SP3 &
+- Linux Server (Recommended Debian 7, SUSE Linux Enterprise Server 11 SP3 &
   12, Red Hat Enterprise Linux/CentOS 6.5 and 7, Ubuntu 14.04 LTS, 16.04 LTS)
 - Web server: [Apache 2 (mod_php, php-fpm)][1] or [Nginx (php-fpm)][2]
 - PHP >= 5.6
@@ -21,29 +20,28 @@ berikut:
 
 <!--more-->
 
-### Database Requirements untuk MySQL / MariaDB
+### Database Requirements for MySQL / MariaDB
 
-Untuk menjalankan Nextcloud server dengan MySQL/MariaDB, dibutuhkan pengaturan
-tambahan sebagai berikut:
+To run Nextcloud server with MySQL/MariaDB, the following additional settings
+are required:
 
-- Menonaktifkan _Binary Logging_ atau mengatur format log menjadi "mixed"
+- Disable _Binary Logging_ or set the log format to "mixed"
   (BINLOG_FORMAT = MIXED).
 - InnoDB storage engine
-- “READ COMMITED” transaction isolation level.
+- “READ COMMITTED” transaction isolation level.
 
 ### Emoji (UTF8 4-byte) support with MySQL / MariaDB
 
-Untuk dapat mengaktifkan penggunaan emoji pada Nextcloud, database yang dibuat
-harus menggunakan _charset_ `utf8mb4` dan _collate_ `utf8mb4_general_ci`,
-contoh:
+To enable emoji support in Nextcloud, the database must use the `utf8mb4`
+_charset_ and `utf8mb4_general_ci` _collate_, for example:
 
 ```
 CREATE DATABASE nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
-### Prasyarat PHP
+### PHP Prerequisites
 
-Berikut merupakan modul yang wajib ada untuk dapat menjalankan Nextcloud:
+The following modules are required to run Nextcloud:
 
 - PHP (>= 5.6, 7.0 or 7.1)
 - PHP module ctype
@@ -59,34 +57,34 @@ Berikut merupakan modul yang wajib ada untuk dapat menjalankan Nextcloud:
 - PHP module zip
 - PHP module zlib
 
-Untuk koneksi database
+For database connections
 
 - PHP module sqlite
 - PHP module pdo_mysql (MySQL/MariaDB)
 - PHP module pgsql (requires PostgreSQL >= 9.0)
 
-### Mempersiapkan Server
+### Preparing the Server
 
-Unduh berkas arsip Nextcloud di <https://nextcloud.com/install>. Lalu Ekstrak
-berkas Nextcloud ke root folder webserver.
+Download the Nextcloud archive from <https://nextcloud.com/install>, then
+extract it to the web server's root folder.
 
 ```
 $ tar xjvf nextcloud-11.0.2.tar.bz2
 ```
 
-Atau jika menggunakan berkas .zip
+Or, if you're using the .zip file
 
 ```
 $ unzip nextcloud-11.0.2.zip
 ```
 
-Ubah kepemilikan berkas
+Change file ownership
 
 ```
 # chown www-data:www-data -R nextcloud
 ```
 
-Aktifkan `mod_rewrite`, `mod_headers`, `mod_env`, `mod_dir`, dan `mod_mime`.
+Enable `mod_rewrite`, `mod_headers`, `mod_env`, `mod_dir`, and `mod_mime`.
 
 ```
 # a2enmod rewrite
@@ -96,40 +94,39 @@ Aktifkan `mod_rewrite`, `mod_headers`, `mod_env`, `mod_dir`, dan `mod_mime`.
 # a2enmod mime
 ```
 
-Restart Server
+Restart the Server
 
 ```
 # systemctl restart apache2.service
 ```
 
-Atau
+Or
 
 ```
 # systemctl restart nginx.service
 ```
 
-### Mempersiapkan Database
+### Preparing the Database
 
-Masuk ke database server, pada kali ini saya menggunakan MariaDB. Lalu buat
-database baru
+Log in to the database server — I'm using MariaDB here — then create a new
+database
 
 ```
 CREATE DATABASE nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
-Buat user baru khusus untuk Nextcloud (opsional)
+Create a new user specifically for Nextcloud (optional)
 
 ```
 CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost' IDENTIFIED BY 'password';
 ```
 
-### Instal Nextcloud
+### Install Nextcloud
 
-Akses Nextcloud melalui <http://localhost/nextcloud>. Pada bagian database pilih
-MySQL/MariaDB lalu isi sesuai data yang sudah dibuat sebelumnya. Jika selesai
-maka Nextcloud siap digunakan. Rujuk
-[dokumentasi Nextcloud](https://docs.nextcloud.com) untuk informasi lebih
-lanjut.
+Access Nextcloud at <http://localhost/nextcloud>. In the database section,
+select MySQL/MariaDB and fill in the details you created earlier. Once done,
+Nextcloud is ready to use. See the
+[Nextcloud documentation](https://docs.nextcloud.com) for more information.
 
-![Nexcloud user interface](images/nextcloud.png)
+![Nextcloud user interface](images/nextcloud.png)

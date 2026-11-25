@@ -1,50 +1,45 @@
 ---
-title:
-    Mengatasi Permasalahan CPU Usage Pada Pemasangan HDD Caddy di Laptop HP
-    14-R202TX
+title: Fixing High CPU Usage After Installing an HDD Caddy in an HP 14-R202TX Laptop
 image: ./images/caddy2.jpg
 date: 2017-04-08T13:37:31+07:00
 tags:
     - Troubleshoot
 ---
 
-Beberapa waktu lalu saya memutuskan untuk mengganti HDD pada laptop saya dengan
-SSD. SSD memiliki keunggulan dalam kecepatan jika dibandingkan dengan HDD pada
-umumnya, sayangnya dengan harga yang relatif lebih mahal. Saya membeli SSD merek
-sandisk seharga Rp. 560.000 dengan kapasitas 120GB, di toko yang sama HDD 500GB
-dijual seharga Rp. 590.000.
+A while ago I decided to replace the HDD in my laptop with an SSD. SSDs are
+much faster than regular HDDs, but they cost more. I bought a 120GB SanDisk SSD
+for Rp 560,000 — at the same store, a 500GB HDD was selling for Rp 590,000.
 
-Karena kapasitasnya yang lebih kecil saya memutuskan untuk tetap meng­gu­na­kan HDD
-sebagai media penyimpanan sekunder dengan menggunakan HDD Caddy. HDD Caddy akan
-menggantikan posisi DVD-ROM pada laptop yang tidak pernah saya pergunakan.
+Because the SSD's capacity is smaller, I decided to keep using the HDD as
+secondary storage with an HDD caddy. The caddy replaces the DVD-ROM drive in
+the laptop, which I never use.
 
 <!--more-->
 
 ![HDD Caddy](images/caddy1.jpg)
 
-![HDD Caddy di tray DVD-ROM](images/caddy2.jpg)
+![HDD caddy in the DVD-ROM tray](images/caddy2.jpg)
 
-### Masalah Pada CPU Usage
+### The CPU Usage Problem
 
-Setelah pemasangan selesai terjadi keanehan pada grafik penggunaan CPU pada
-laptop saya. Dalam keadaan _idle_ tanpa membuka aplikasi apapun penggunaan cpu
-cukup tinggi, seperti terlihat pada gambar berikut:
+After the installation, something odd showed up in my laptop's CPU usage graph.
+Even when _idle_, with no applications open, CPU usage was quite high, as you
+can see in the image below:
 
-![Grafik CPU Tinggi Meski Dalam Keadaan Idle](images/cpuusage.jpg)
+![High CPU usage even when idle](images/cpuusage.jpg)
 
-Awalnya saya pikir masalah tersebut terjadi karena saya meng&shy;gunakan sistem
-operasi GNU/Linux. Ternyata saat saya masuk menu BIOS penggunaan CPU juga
-tinggi, hal ini terasa dari dengungan kipas pendingin yang tidak normal. Untuk
-mengatasi permasalahan ini ternyata hanya perlu menggeser tombol _switch_ pada
-HDD Caddy seperti pada gambar berikut:
+At first I thought the problem was because I was using GNU/Linux. But when I
+entered the BIOS menu, CPU usage was still high — I could tell from the cooling
+fan humming louder than normal. As it turned out, the fix was simply to slide
+the _switch_ on the HDD caddy, as shown in the image below:
 
-![Switch Pada HDD Caddy](images/caddy3.jpg)
+![The switch on the HDD caddy](images/caddy3.jpg)
 
 ---
 
-**Catatan**
+**Notes**
 
-1. HDD caddy saya beli di
+1. I bought the HDD caddy at
    [Jakmall](https://www.jakmall.com/search?q=9704838345891)
-2. Sumber:
+2. Source:
    [http://forum.notebookreview.com][http://forum.notebookreview.com/threads/hp-elitebook-8560p-wont-shutdown.655065/page-2#post8986739]

@@ -7,31 +7,31 @@ tags:
     - Web Development
 ---
 
-Masalah ini sering sekali saya alami, apalagi setelah lama tidak menggunakan
-database secara langsung, dan bodohnya saya selalu lupa caranya. Kali ini saya
-catat di sini agar suatu saat saya lupa lagi, saya tau kemana harus mencari.
+I run into this problem all the time, especially after not touching a database
+directly for a while — and foolishly, I always forget how to fix it. So I'm
+writing it down here, so the next time I forget, I know where to look.
 
 <!--more-->
 
-## 1. Stop service
+## 1. Stop the service
 
 ```
 $ sudo systemctl stop mariadb
 ```
 
-## 2. Restart dengan opsi skip password dan networking
+## 2. Restart with password and networking skipped
 
 ```
 $ sudo mysqld_safe --skip-grant-tables --skip-networking &
 ```
 
-## 3. Sambungkan ulang server dengan akun root
+## 3. Reconnect to the server as root
 
 ```
 $ mysql -u root
 ```
 
-## 4. Gunakan perintah berikut untuk me-_reset_ password
+## 4. Run the following commands to reset the password
 
 ```
 mysql> FLUSH PRIVILEGES;
@@ -45,23 +45,23 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'passwordbaru';
 mysql> FLUSH PRIVILEGES;
 ```
 
-## 5. Mulai ulang database server
+## 5. Restart the database server
 
-Pertama `kill` proses yang sebelumnya dijalankan manual.
+First, kill the process you started manually.
 
-Untuk mysql:
+For MySQL:
 
 ```
 $ sudo kill `cat /var/run/mysqld/mysqld.pid`
 ```
 
-Untuk mariadb:
+For MariaDB:
 
 ```
 $ sudo kill `/var/run/mariadb/mariadb.pid`
 ```
 
-Jalankan ulang database service
+Start the database service again
 
 ```
 $ sudo systemctl start mariadb
