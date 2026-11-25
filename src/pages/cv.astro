@@ -60,11 +60,11 @@ const awards = (author.awards ?? []).map((e) => {
 					contacts?.email && (
 						<li class="md:px-4">
 							<a
-								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+								class="group flex text-sm font-medium text-zinc-800 transition hover:text-dusty-500 dark:text-zinc-200 dark:hover:text-dusty-500"
 								href={`mailto:${contacts.email}`}
 							>
 								<Icons.MailIcon
-									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-dusty-500"
 								/>
 								<span class="ml-2">
 									{contacts.email}
@@ -77,11 +77,11 @@ const awards = (author.awards ?? []).map((e) => {
 					contacts?.linkedin && (
 						<li class="md:px-4">
 							<a
-								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+								class="group flex text-sm font-medium text-zinc-800 transition hover:text-dusty-500 dark:text-zinc-200 dark:hover:text-dusty-500"
 								href={contacts.linkedin}
 							>
 								<Icons.LinkedInIcon
-									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-dusty-500"
 								/>
 								<span class="ml-2">
 									{contacts.linkedin.replace('https://', '')}
@@ -94,11 +94,11 @@ const awards = (author.awards ?? []).map((e) => {
 					contacts?.github && (
 						<li class="md:px-4">
 							<a
-								class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+								class="group flex text-sm font-medium text-zinc-800 transition hover:text-dusty-500 dark:text-zinc-200 dark:hover:text-dusty-500"
 								href={contacts.github}
 							>
 								<Icons.GitHubIcon
-									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500"
+									className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-dusty-500"
 								/>
 								<span class="ml-2">
 									{contacts.github.replace('https://', '')}

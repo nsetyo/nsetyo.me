@@ -147,8 +147,8 @@ export function NavItem({ isActive, href, children }: NavItemProps) {
 				className={twJoin(
 					'relative block px-3 py-2 transition',
 					isActive
-						? 'text-teal-500 dark:text-teal-400'
-						: 'hover:text-teal-500 dark:hover:text-teal-400',
+						? 'text-dusty-500 dark:text-dusty-400'
+						: 'hover:text-dusty-500 dark:hover:text-dusty-400',
 				)}
 			>
 				{children}
@@ -160,12 +160,12 @@ export function NavItem({ isActive, href, children }: NavItemProps) {
 							'-bottom-px',
 							'h-px',
 							'bg-linear-to-r',
-							'from-teal-500/0',
-							'via-teal-500/40',
-							'to-teal-500/0',
-							'dark:from-teal-400/0',
-							'dark:via-teal-400/40',
-							'dark:to-teal-400/0',
+							'from-dusty-500/0',
+							'via-dusty-500/40',
+							'to-dusty-500/0',
+							'dark:from-dusty-400/0',
+							'dark:via-dusty-400/40',
+							'dark:to-dusty-400/0',
 						)}
 					/>
 				)}
