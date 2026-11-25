@@ -6,6 +6,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Dusty blue accent — calm, muted blue-grey that matches Papa's quiet
+     character and the calm illustration palette (pale blue-grey / cream /
+     sage). Replaces the template's default teal. */
+  --color-dusty-50: #f2f5f7;
+  --color-dusty-400: #8aa0b0;
+  --color-dusty-500: #5b7285;
+  --color-dusty-600: #4a5f70;
+
   --text-xs: 0.8125rem;
   --text-xs--line-height: 1.5rem;
   --text-sm: 0.875rem;
